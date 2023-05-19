@@ -6,9 +6,11 @@ import main.KeyHandler;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
-public class Player extends Entity{
+public class Player extends Entity {
     GamePanel gamePanel;
     KeyHandler keyHandler;
 
@@ -30,14 +32,14 @@ public class Player extends Entity{
     public void getPlayerImage(){
         try {
 
-            up1 = ImageIO.read(getClass().getResourceAsStream("res/player/Space Shuttle 32x32.png"));
-            up2 = ImageIO.read(getClass().getResourceAsStream("res/player/Space Shuttle 32x32.png"));
-            down1 = ImageIO.read(getClass().getResourceAsStream("res/player/nave_cactus_32x32.png"));
-            down2 = ImageIO.read(getClass().getResourceAsStream("res/player/nave_cactus_32x32.png"));
-            left1 = ImageIO.read(getClass().getResourceAsStream("res/player/Space Shuttle 32x32.png"));
-            left2 = ImageIO.read(getClass().getResourceAsStream("res/player/Space Shuttle 32x32.png"));
-            right1 = ImageIO.read(getClass().getResourceAsStream("res/player/Space Shuttle 32x32.png"));
-            right2 = ImageIO.read(getClass().getResourceAsStream("res/player/Space Shuttle 32x32.png"));
+            up1 = ImageIO.read(new File("res/player/nave_spaziale_accesa.png"));
+            up2 = ImageIO.read(new File("res/player/Space Shuttle 32x32.png"));
+            down1 = ImageIO.read(new File("res/player/nave_spaziale_spenta.png"));
+            down2 = ImageIO.read(new File("res/player/Space Shuttle 32x32.png"));
+            left1 = ImageIO.read(new File("res/player/nave_spaziale_accesa.png"));
+            left2 = ImageIO.read(new File("res/player/Space Shuttle 32x32.png"));
+            right1 = ImageIO.read(new File("res/player/nave_spaziale_accesa.png"));
+            right2 = ImageIO.read(new File("res/player/Space Shuttle 32x32.png"));
 
         } catch(IOException e){
             e.printStackTrace();
