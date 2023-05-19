@@ -25,20 +25,20 @@ public class Player extends Entity {
     public void setDefaultValues(){
         x = 100; // declared in super class
         y = 100;
-        speed = 4;
+        speed = 1;
         direction = "up";
     }
 
     public void getPlayerImage(){
         try {
 
-            up1 = ImageIO.read(new File("res/player/nave_spaziale_accesa.png"));
-            up2 = ImageIO.read(new File("res/player/Space Shuttle 32x32.png"));
+            up1 = ImageIO.read(new File("res/player/nave_spaziale_spenta(2).png")); //standing
+            up2 = ImageIO.read(new File("res/player/nave_spaziale_accesa.png"));
             down1 = ImageIO.read(new File("res/player/nave_spaziale_spenta.png"));
             down2 = ImageIO.read(new File("res/player/Space Shuttle 32x32.png"));
-            left1 = ImageIO.read(new File("res/player/nave_spaziale_accesa.png"));
+            left1 = ImageIO.read(new File("res/player/nave_spaziale_right(2).png"));
             left2 = ImageIO.read(new File("res/player/Space Shuttle 32x32.png"));
-            right1 = ImageIO.read(new File("res/player/nave_spaziale_accesa.png"));
+            right1 = ImageIO.read(new File("res/player/nave_spaziale_left.png"));
             right2 = ImageIO.read(new File("res/player/Space Shuttle 32x32.png"));
 
         } catch(IOException e){
@@ -59,6 +59,8 @@ public class Player extends Entity {
         } else if (keyHandler.rightPressed){
             direction = "right";
             x += speed;
+        } else {
+            direction = "standing";
         }
     }
 
@@ -69,7 +71,8 @@ public class Player extends Entity {
         BufferedImage image = null;
 
         switch(direction){
-            case "up" -> image = up1;
+            case "standing" -> image = up1;
+            case "up" -> image = up2;
             case "down" -> image = down1;
             case "left" -> image = left1;
             case "right" -> image = right1;
