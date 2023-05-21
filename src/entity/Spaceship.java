@@ -24,7 +24,7 @@ public class Spaceship extends Entity {
     public void setDefaultValues(){
         x = 100;
         y = 100;
-        speed = 1;
+        speed = 2;
         direction = "up";
     }
 

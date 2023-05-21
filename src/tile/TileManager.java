@@ -12,8 +12,8 @@ public class TileManager {
     GamePanel gamePanel;
     public Tile[] tile;
     public final int tilesNumber = 10;
-    public final int tilesVelocity = 20; // to increase the update speed decrease this value
     public int[] tracer;
+
     public int[][] mapTileNumber;
     public int y;
 
@@ -38,7 +38,7 @@ public class TileManager {
                 tile[1].image = ImageIO.read(new File("res/tiles/cielo_stellato_2.png"));
 
                 tile[2] = new Tile();
-                tile[2].image = ImageIO.read(new File("res/tiles/cielo_stellato_4.png"));
+                tile[2].image = ImageIO.read(new File("res/tiles/cielo_stellato_3.png"));
 
                 tile[3] = new Tile();
                 tile[3].image = ImageIO.read(new File("res/tiles/cielo_stellato_4.png"));
@@ -73,7 +73,7 @@ public class TileManager {
             for(int col = 0; col < gamePanel.maxScreenCol; ++col){
                 int number = rng.nextInt(0,tilesNumber);
                 if(number == 7 || number == 8){
-                    if(tracer[number] < 15){
+                    if(tracer[number] < 20){
                         ++tracer[number];
                         number = 3;
                     } else {
@@ -95,7 +95,7 @@ public class TileManager {
         for(int col = 0; col < gamePanel.maxScreenCol; ++col){
             int number = rng.nextInt(0,tilesNumber);
             if(number == 7 || number == 8){
-                if(tracer[number] < 15){
+                if(tracer[number] < 18){
                     ++tracer[number];
                     number = 3;
                 } else {
@@ -115,10 +115,6 @@ public class TileManager {
                 y1 += gamePanel.tileSize;
             }
             for(int col = 0; col < gamePanel.maxScreenCol; ++col){
-                if(y1 > 768){
-                    //y1 = 0;
-                    //break;
-                }
                 graphics2D.drawImage((tile[mapTileNumber[col][row]]).image, x1, y1, gamePanel.tileSize, gamePanel.tileSize, null);
                 x1 += gamePanel.tileSize;
             }
