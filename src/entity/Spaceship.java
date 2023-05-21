@@ -25,7 +25,7 @@ public class Spaceship extends Entity {
         x = 100;
         y = 100;
         speed = 2;
-        direction = "up";
+        direction = "standing";
     }
 
     public void getPlayerImage(){
@@ -74,8 +74,6 @@ public class Spaceship extends Entity {
     }
 
     public void draw(Graphics2D graphics2D){
-        // graphics2D.setColor(Color.white);
-        // graphics2D.fillRect(x, y, gamePanel.tileSize, gamePanel.tileSize);
 
         BufferedImage image = null;
 

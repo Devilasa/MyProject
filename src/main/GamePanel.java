@@ -1,5 +1,6 @@
 package main;
 
+import entity.Asteroid;
 import entity.Spaceship;
 import tile.TileManager;
 
@@ -25,6 +26,8 @@ public class GamePanel extends JPanel  implements Runnable {
     KeyHandler keyHandler = new KeyHandler();
     Thread gameThread;
     Spaceship spaceship = new Spaceship(this, keyHandler);
+
+    Asteroid asteroid1 = new Asteroid(this, 3);
 
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -72,6 +75,7 @@ public class GamePanel extends JPanel  implements Runnable {
 
     public void update(){
 
+        asteroid1.update();
         spaceship.update();
 
     }
@@ -101,6 +105,9 @@ public class GamePanel extends JPanel  implements Runnable {
         tileManager2.draw(graphics2D);
         tileManager3.draw(graphics2D);
         spaceship.draw(graphics2D);
+        asteroid1.draw(graphics2D);
+
+
         graphics2D.dispose();
 
     }
