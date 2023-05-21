@@ -5,10 +5,14 @@ import main.GamePanel;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.*;
+import java.util.Random;
+import java.util.random.RandomGenerator;
 
 public class TileManager {
     GamePanel gamePanel;
     Tile[] tile;
+    public final int tilesNumber = 10;
+    int[] tracer;
 
     int[][] mapTileNumber;
 
@@ -16,6 +20,7 @@ public class TileManager {
         this.gamePanel = gamePanel;
 
         tile = new Tile[10];
+        tracer = new int[tilesNumber];
         mapTileNumber = new int[gamePanel.maxScreenCol][gamePanel.maxScreenRow];
         getTileImages();
         loadMap();
@@ -31,7 +36,7 @@ public class TileManager {
                 tile[1].image = ImageIO.read(new File("res/tiles/cielo_stellato_2.png"));
 
                 tile[2] = new Tile();
-                tile[2].image = ImageIO.read(new File("res/tiles/cielo_stellato_3.png"));
+                tile[2].image = ImageIO.read(new File("res/tiles/cielo_stellato_6.png"));
 
                 tile[3] = new Tile();
                 tile[3].image = ImageIO.read(new File("res/tiles/cielo_stellato_4.png"));
@@ -51,8 +56,8 @@ public class TileManager {
                 tile[8] = new Tile();
                 tile[8].image = ImageIO.read(new File("res/tiles/cielo_stellato_9.png"));
 
-
-
+                tile[9] = new Tile();
+                tile[9].image = ImageIO.read(new File("res/tiles/cielo_stellato_10.png"));
 
 
         } catch (IOException e){
@@ -61,33 +66,32 @@ public class TileManager {
     }
 
     public void loadMap(){
-        try{
-            InputStream inputStream = new FileInputStream("res/maps/map01.txt");
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+        RandomGenerator rng = RandomGenerator.getDefault();
+        for(int row = 0; row < gamePanel.maxScreenRow; ++row){
+            for(int col = 0; col < gamePanel.maxScreenCol; ++col){
+                mapTileNumber[col][row] = rng.nextInt(0,tilesNumber);
+            }
+        }
+    }
 
-            int col = 0;
-            int row = 0;
-
-            while (col < gamePanel.maxScreenCol && row < gamePanel.maxScreenRow){
-                String line = bufferedReader.readLine();
-
-                while (col < gamePanel.maxScreenCol){
-                    String[] numbers = line.split(" ");
-
-                    int num = Integer.parseInt(numbers[col]);
-
-                    mapTileNumber[col][row] = num;
-                    col++;
-                }
-                if (col == gamePanel.maxScreenCol){
-                    col = 0;
-                    row++;
+    public void updateMap(){
+        for(int row = gamePanel.maxScreenRow - 1; row > 0; --row){
+            for(int col = 0; col < gamePanel.maxScreenCol; ++col){
+                mapTileNumber[col][row] = mapTileNumber[col][row-1];
+            }
+        }
+        RandomGenerator rng = RandomGenerator.getDefault();
+        for(int col = 0; col < gamePanel.maxScreenCol; ++col){
+            int number = rng.nextInt(0,tilesNumber);
+            if(number == 7 || number == 8){
+                if(tracer[number] < 15){
+                    ++tracer[number];
+                    number = 3;
+                } else {
+                    tracer[number] = 0;
                 }
             }
-            bufferedReader.close();
-
-        } catch (Exception e){
-            e.printStackTrace();
+            mapTileNumber[col][0] = number;
         }
     }
     public void draw(Graphics2D graphics2D) {

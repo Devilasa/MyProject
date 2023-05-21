@@ -10,15 +10,17 @@ import java.awt.*;
 public class GamePanel extends JPanel  implements Runnable {
     //SCREEN SETTINGS
     public final int originalTileSize = 16; // 16x16 tile
-    public final int scale = 3;
-    public final int tileSize = originalTileSize * scale; // 48x48 tile
+    public final int scale = 4;
+    public final int tileSize = originalTileSize * scale; // 64x64 tile
     public final int maxScreenCol = 16;
     public final int maxScreenRow = 12;
-    public final int screenWidth = tileSize * maxScreenCol; // 768 pixels
-    public final int screenHeight = tileSize * maxScreenRow; // 576 pixels
+    public final int screenWidth = tileSize * maxScreenCol; //
+    public final int screenHeight = tileSize * maxScreenRow; //
 
     //FPS
     public final int FPS = 120;
+
+    static int counter = 0;
 
     TileManager tileManager = new TileManager(this);
     KeyHandler keyHandler = new KeyHandler();
@@ -68,14 +70,18 @@ public class GamePanel extends JPanel  implements Runnable {
     }
 
     public void update(){
+
         player.update();
     }
     public void paintComponent(Graphics graphics) {
-
+        counter++;
         super.paintComponent(graphics);
 
         Graphics2D graphics2D = (Graphics2D) graphics;
-
+        if(counter >= 20) {
+            tileManager.updateMap();
+            counter = 0;
+        }
         tileManager.draw(graphics2D);
         player.draw(graphics2D);
         graphics2D.dispose();
