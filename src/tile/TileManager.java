@@ -10,11 +10,12 @@ import java.util.random.RandomGenerator;
 
 public class TileManager {
     GamePanel gamePanel;
-    Tile[] tile;
+    public Tile[] tile;
     public final int tilesNumber = 10;
-    int[] tracer;
-
-    int[][] mapTileNumber;
+    public final int tilesVelocity = 20; // to increase the update speed decrease this value
+    public int[] tracer;
+    public int[][] mapTileNumber;
+    public int y;
 
     public TileManager (GamePanel gamePanel){
         this.gamePanel = gamePanel;
@@ -22,6 +23,7 @@ public class TileManager {
         tile = new Tile[10];
         tracer = new int[tilesNumber];
         mapTileNumber = new int[gamePanel.maxScreenCol][gamePanel.maxScreenRow];
+        y = 0;
         getTileImages();
         loadMap();
     }
@@ -36,7 +38,7 @@ public class TileManager {
                 tile[1].image = ImageIO.read(new File("res/tiles/cielo_stellato_2.png"));
 
                 tile[2] = new Tile();
-                tile[2].image = ImageIO.read(new File("res/tiles/cielo_stellato_6.png"));
+                tile[2].image = ImageIO.read(new File("res/tiles/cielo_stellato_4.png"));
 
                 tile[3] = new Tile();
                 tile[3].image = ImageIO.read(new File("res/tiles/cielo_stellato_4.png"));
@@ -69,7 +71,16 @@ public class TileManager {
         RandomGenerator rng = RandomGenerator.getDefault();
         for(int row = 0; row < gamePanel.maxScreenRow; ++row){
             for(int col = 0; col < gamePanel.maxScreenCol; ++col){
-                mapTileNumber[col][row] = rng.nextInt(0,tilesNumber);
+                int number = rng.nextInt(0,tilesNumber);
+                if(number == 7 || number == 8){
+                    if(tracer[number] < 15){
+                        ++tracer[number];
+                        number = 3;
+                    } else {
+                        tracer[number] = 0;
+                    }
+                }
+                mapTileNumber[col][row] = number;
             }
         }
     }
@@ -95,21 +106,21 @@ public class TileManager {
         }
     }
     public void draw(Graphics2D graphics2D) {
-        int col = 0;
-        int row = 0;
-        int x = 0;
-        int y = 0;
+        int x1 = 0;
+        int y1 = y;
 
-        while (col < gamePanel.maxScreenCol && row < gamePanel.maxScreenRow) {
-            int tileNumber = mapTileNumber[col][row];
-            graphics2D.drawImage(tile[tileNumber].image, x, y, gamePanel.tileSize, gamePanel.tileSize, null);
-            col++;
-            x += gamePanel.tileSize;
-            if(col == gamePanel.maxScreenCol){
-                col = 0;
-                x = 0;
-                row++;
-                y += gamePanel.tileSize;
+        for(int row = 0; row < gamePanel.maxScreenRow; ++row){
+            x1 = 0;
+            if(row != 0) {
+                y1 += gamePanel.tileSize;
+            }
+            for(int col = 0; col < gamePanel.maxScreenCol; ++col){
+                if(y1 > 768){
+                    //y1 = 0;
+                    //break;
+                }
+                graphics2D.drawImage((tile[mapTileNumber[col][row]]).image, x1, y1, gamePanel.tileSize, gamePanel.tileSize, null);
+                x1 += gamePanel.tileSize;
             }
         }
     }

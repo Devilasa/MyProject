@@ -8,13 +8,12 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Objects;
 
-public class Player extends Entity {
+public class Spaceship extends Entity {
     GamePanel gamePanel;
     KeyHandler keyHandler;
 
-    public Player(GamePanel gamePanel, KeyHandler keyHandler){
+    public Spaceship(GamePanel gamePanel, KeyHandler keyHandler){
         this.gamePanel = gamePanel;
         this.keyHandler = keyHandler;
 
@@ -23,7 +22,7 @@ public class Player extends Entity {
     }
 
     public void setDefaultValues(){
-        x = 100; // declared in super class
+        x = 100;
         y = 100;
         speed = 1;
         direction = "up";
@@ -31,15 +30,15 @@ public class Player extends Entity {
 
     public void getPlayerImage(){
         try {
-            standing = ImageIO.read(new File("res/player/nave_spaziale_ferma.png"));
-            up1 = ImageIO.read(new File("res/player/nave_spaziale_accesa_2.png"));
-            up2 = ImageIO.read(new File("res/player/nave_spaziale_accesa_2.png"));
-            down1 = ImageIO.read(new File("res/player/nave_spaziale_alto_2.png"));
-            down2 = ImageIO.read(new File("res/player/nave_spaziale_alto_2.png"));
-            left1 = ImageIO.read(new File("res/player/nave_spaziale_left_2.png"));
-            left2 = ImageIO.read(new File("res/player/nave_spaziale_left_2.png"));
-            right1 = ImageIO.read(new File("res/player/nave_spaziale_right_2.png"));
-            right2 = ImageIO.read(new File("res/player/nave_spaziale_right_2.png"));
+            standing = ImageIO.read(new File("res/spaceship/nave_spaziale_ferma.png"));
+            up1 = ImageIO.read(new File("res/spaceship/nave_spaziale_accesa_2.png"));
+            up2 = ImageIO.read(new File("res/spaceship/nave_spaziale_accesa_2.png"));
+            down1 = ImageIO.read(new File("res/spaceship/nave_spaziale_alto_2.png"));
+            down2 = ImageIO.read(new File("res/spaceship/nave_spaziale_alto_2.png"));
+            left1 = ImageIO.read(new File("res/spaceship/nave_spaziale_left_2.png"));
+            left2 = ImageIO.read(new File("res/spaceship/nave_spaziale_left_2.png"));
+            right1 = ImageIO.read(new File("res/spaceship/nave_spaziale_right_2.png"));
+            right2 = ImageIO.read(new File("res/spaceship/nave_spaziale_right_2.png"));
 
         } catch(IOException e){
             e.printStackTrace();

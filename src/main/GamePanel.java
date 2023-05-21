@@ -1,7 +1,6 @@
 package main;
 
-import entity.Player;
-import main.KeyHandler;
+import entity.Spaceship;
 import tile.TileManager;
 
 import javax.swing.*;
@@ -14,18 +13,19 @@ public class GamePanel extends JPanel  implements Runnable {
     public final int tileSize = originalTileSize * scale; // 64x64 tile
     public final int maxScreenCol = 16;
     public final int maxScreenRow = 12;
-    public final int screenWidth = tileSize * maxScreenCol; //
-    public final int screenHeight = tileSize * maxScreenRow; //
+    public final int screenWidth = tileSize * maxScreenCol; // 1024 pixels
+    public final int screenHeight = tileSize * maxScreenRow; // 768 pixels
 
     //FPS
     public final int FPS = 120;
 
     static int counter = 0;
 
-    TileManager tileManager = new TileManager(this);
+    TileManager tileManager1 = new TileManager(this);
+    TileManager tileManager2 = new TileManager(this);
     KeyHandler keyHandler = new KeyHandler();
     Thread gameThread;
-    Player player = new Player(this, keyHandler);
+    Spaceship spaceship = new Spaceship(this, keyHandler);
 
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -33,6 +33,7 @@ public class GamePanel extends JPanel  implements Runnable {
         this.setDoubleBuffered(true);
         this.addKeyListener(keyHandler);
         this.setFocusable(true);
+        tileManager1.y = -screenHeight;
     }
 
     public void startGameThread() {
@@ -71,19 +72,37 @@ public class GamePanel extends JPanel  implements Runnable {
 
     public void update(){
 
-        player.update();
+        spaceship.update();
+
     }
     public void paintComponent(Graphics graphics) {
         counter++;
         super.paintComponent(graphics);
-
         Graphics2D graphics2D = (Graphics2D) graphics;
-        if(counter >= 20) {
-            tileManager.updateMap();
+
+
+        if(tileManager1.y < 0) {
+            tileManager1.y += 1;
+            tileManager2.y += 1;
+        }
+        else {
+            tileManager2.mapTileNumber = tileManager1.mapTileNumber;
+            tileManager1.loadMap();
+            tileManager1.y = -screenHeight;
+            tileManager2.y = 0;
+        }
+
+
+
+        if(counter >= tileManager1.tilesVelocity) {
+            //tileManager.updateMap();
+
+
             counter = 0;
         }
-        tileManager.draw(graphics2D);
-        player.draw(graphics2D);
+        tileManager1.draw(graphics2D);
+        tileManager2.draw(graphics2D);
+        spaceship.draw(graphics2D);
         graphics2D.dispose();
 
     }
