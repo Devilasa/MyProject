@@ -32,6 +32,8 @@ public class GamePanel extends JPanel  implements Runnable {
     public ArrayList<Entity> entitiesList = new ArrayList<>();
     public Spaceship spaceship = new Spaceship(this, keyHandler);
     public Asteroid asteroid1 = new Asteroid(this, 3);
+    public Asteroid asteroid2 = new Asteroid(this, 2);
+    public Asteroid asteroid3 = new Asteroid(this, 1);
 
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -44,6 +46,8 @@ public class GamePanel extends JPanel  implements Runnable {
 
         entitiesList.add(spaceship);
         entitiesList.add(asteroid1);
+        entitiesList.add(asteroid2);
+        entitiesList.add(asteroid3);
 
     }
 
@@ -83,8 +87,10 @@ public class GamePanel extends JPanel  implements Runnable {
 
     public void update(){
 
-        asteroid1.update();
         spaceship.update();
+        asteroid1.update();
+        asteroid2.update();
+        asteroid3.update();
 
     }
     public void paintComponent(Graphics graphics) {
@@ -109,6 +115,8 @@ public class GamePanel extends JPanel  implements Runnable {
 
         spaceship.draw(graphics2D);
         asteroid1.draw(graphics2D);
+        asteroid2.draw(graphics2D);
+        asteroid3.draw(graphics2D);
         graphics2D.dispose();
 
     }

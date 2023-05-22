@@ -16,6 +16,7 @@ public class Entity {
     public BufferedImage left2;
     public BufferedImage right1;
     public BufferedImage right2;
+    public BufferedImage bonus;
     public String direction;
 
     public int spriteCounter = 0;
@@ -27,5 +28,8 @@ public class Entity {
     int TEXTURE_SHIFT_X;
     int TEXTURE_SHIFT_Y;
 
-
+    public void updateSolidArea(){
+        solidArea.x = x + TEXTURE_SHIFT_X;
+        solidArea.y = y + TEXTURE_SHIFT_Y;
+    }
 }

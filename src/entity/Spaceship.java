@@ -44,6 +44,7 @@ public class Spaceship extends Entity {
             left2 = ImageIO.read(new File("res/spaceship/nave_spaziale_left_2.png"));
             right1 = ImageIO.read(new File("res/spaceship/nave_spaziale_right_2.png"));
             right2 = ImageIO.read(new File("res/spaceship/nave_spaziale_right_2.png"));
+            bonus = ImageIO.read(new File("res/spaceship/esplosione1.png"));
 
         } catch(IOException e){
             e.printStackTrace();
@@ -78,13 +79,13 @@ public class Spaceship extends Entity {
             y = 0;
         }
 
-        solidArea.x = x + TEXTURE_SHIFT_X;
-        solidArea.y = y + TEXTURE_SHIFT_Y;
+        updateSolidArea();
 
         collision = false;
         gamePanel.collisionChecker.checkCollision(this);
         if(collision){
-            //gamePanel.gameThread = null;
+           // gamePanel.gameThread = null;
+
             System.out.println("COLLISION!");
         }
 

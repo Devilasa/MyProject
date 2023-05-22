@@ -14,8 +14,7 @@ public class Asteroid extends Entity{
     GamePanel gamePanel;
 
     int AsteroidType;
-
-
+    static int collisionCounter = 0;
     public Asteroid(GamePanel gamePanel, int AsteroidType) {
         this.gamePanel = gamePanel;
         this.AsteroidType = AsteroidType;
@@ -31,9 +30,22 @@ public class Asteroid extends Entity{
     public void setDefaultValue(){
         Random rng = new Random();
         x = rng.nextInt(0, gamePanel.screenWidth);
-        y = 0;
+        y = -30;
         speed = 2;
         direction = "up";
+    }
+
+    public void respawn(){
+        Random rng = new Random();
+        if(AsteroidType == 3) {
+            x = rng.nextInt(0, gamePanel.screenWidth / 2);
+        } else if (AsteroidType == 2) {
+            x = rng.nextInt(gamePanel.screenWidth / 2, gamePanel.screenWidth);
+        } else {
+            x = rng.nextInt(0, gamePanel.screenWidth);
+        }
+        y = -30;
+        updateSolidArea();
     }
 
 
@@ -41,30 +53,33 @@ public class Asteroid extends Entity{
         switch (AsteroidType) {
             case 1 -> {
                 try {
-                    up1 = ImageIO.read(new File("res/asteroid/asteroide_grigio_1.png"));
-                    down1 = ImageIO.read(new File("res/asteroid/asteroide_grigio_2.png"));
-                    left1 = ImageIO.read(new File("res/asteroid/asteroide_grigio_3.png"));
-                    right1 = ImageIO.read(new File("res/asteroid/asteroide_grigio_4.png"));
+                    up1 = ImageIO.read(new File("res/asteroid/asteroide_fuoco_sopra1.png"));
+                    down1 = ImageIO.read(new File("res/asteroid/asteroide_fuoco_sopra2.png"));
+                    left1 = ImageIO.read(new File("res/asteroid/asteroide_fuoco_sopra3.png"));
+                    right1 = ImageIO.read(new File("res/asteroid/asteroide_fuoco_sopra4.png"));
+                    bonus = ImageIO.read(new File("res/spaceship/esplosione.png"));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
             case 2 -> {
                 try {
-                    up1 = ImageIO.read(new File("res/asteroid/asteroide_rosso_1.png"));
-                    right1 = ImageIO.read(new File("res/asteroid/asteroide_rosso_2.png"));
-                    down1 = ImageIO.read(new File("res/asteroid/asteroide_rosso_3.png"));
-                    left1 = ImageIO.read(new File("res/asteroid/asteroide_rosso_4.png"));
+                    up1 = ImageIO.read(new File("res/asteroid/asteroide_fuoco1.png"));
+                    right1 = ImageIO.read(new File("res/asteroid/asteroide_fuoco2.png"));
+                    down1 = ImageIO.read(new File("res/asteroid/asteroide_fuoco3.png"));
+                    left1 = ImageIO.read(new File("res/asteroid/asteroide_fuoco4.png"));
+                    bonus = ImageIO.read(new File("res/spaceship/esplosione.png"));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
             case 3 -> {
                 try {
-                    up1 = ImageIO.read(new File("res/asteroid/asteroide_infuocato_1.png"));
-                    right1 = ImageIO.read(new File("res/asteroid/asteroide_infuocato_2.png"));
-                    down1 = ImageIO.read(new File("res/asteroid/asteroide_infuocato_3.png"));
-                    left1 = ImageIO.read(new File("res/asteroid/asteroide_infuocato_4.png"));
+                    up1 = ImageIO.read(new File("res/asteroid/asteroide_blu1.png"));
+                    right1 = ImageIO.read(new File("res/asteroid/asteroide_blu2.png"));
+                    down1 = ImageIO.read(new File("res/asteroid/asteroide_blu3.png"));
+                    left1 = ImageIO.read(new File("res/asteroid/asteroide_blu2.png"));
+                    bonus = ImageIO.read(new File("res/spaceship/esplosione.png"));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -74,24 +89,38 @@ public class Asteroid extends Entity{
     }
 
     public void update(){
-        if(y > gamePanel.screenHeight){
-            y = 0;
+        if(direction.equals("explosion")) {
+           solidArea.y = -100;
+           x += 1;
+           y += 1;
+        } else {
+            if(AsteroidType == 3) {
+                x += speed + 1;
+            } else if(AsteroidType == 2){
+                x -= speed;
+            }
+            y += speed;
+            if (x > gamePanel.screenWidth*2) {
+                respawn();
+            }
+            if (y > gamePanel.screenHeight*2) {
+                respawn();
+            }
+            updateSolidArea();
         }
-        y += speed;
-        if(x > gamePanel.screenWidth){
-            Random rng = new Random();
-            x = rng.nextInt(0, gamePanel.screenWidth);
-            y = 0;
-        }
-        x += speed;
 
-        solidArea.x = x + TEXTURE_SHIFT_X;
-        solidArea.y = y + TEXTURE_SHIFT_Y;
-
-        collision = false;
         gamePanel.collisionChecker.checkCollision(this);
         if(collision){
-            System.out.println("SCOPPIO!");
+            direction = "explosion";
+            if(collisionCounter == 60){
+                collisionCounter = 0;
+                collision = false;
+                direction = "up";
+                respawn();
+            } else {
+                collisionCounter++;
+                System.out.println("SCOPPIO!");
+            }
         }
 
 
@@ -117,7 +146,11 @@ public class Asteroid extends Entity{
             case "right" -> image = right1;
             case "down" -> image = down1;
             case "left" -> image = left1;
+            case "explosion" -> image = bonus;
         }
-        graphics2D.drawImage(image, x, y, gamePanel.tileSize / 2, gamePanel.tileSize, null);
+
+        graphics2D.drawImage(image, x, y, gamePanel.tileSize, gamePanel.tileSize, null);
+
+
     }
 }
