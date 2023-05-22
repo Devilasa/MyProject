@@ -112,10 +112,15 @@ public class Spaceship extends Entity {
                 }
             }
         }
-        if (x > gamePanel.screenWidth) {
-            x = 0;
-        } else if(x < 0){
-            x = gamePanel.screenWidth;
+        if (x > gamePanel.screenWidth - gamePanel.SCREEN_SHIFT_X) {
+            x = -gamePanel.SCREEN_SHIFT_X;
+        } else if(x < -gamePanel.SCREEN_SHIFT_X){
+            x = gamePanel.screenWidth - gamePanel.SCREEN_SHIFT_X;
+        }
+        if(y > gamePanel.screenHeight - gamePanel.SCREEN_SHIFT_Y){
+            y = gamePanel.screenHeight - gamePanel.SCREEN_SHIFT_Y;
+        } else if(y < 0){
+            y = 0;
         }
         graphics2D.drawImage(image, x, y, gamePanel.tileSize, gamePanel.tileSize, null);
     }

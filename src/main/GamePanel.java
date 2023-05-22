@@ -16,7 +16,8 @@ public class GamePanel extends JPanel  implements Runnable {
     public final int maxScreenRow = 12;
     public final int screenWidth = tileSize * maxScreenCol; // 1024 pixels
     public final int screenHeight = tileSize * maxScreenRow; // 768 pixels
-
+    public final int SCREEN_SHIFT_X = 32; // for some reasons the actual screen get shifted of a little value near 32 pixels, this refers to the X coordinate (ScreenWidth)
+    public final int SCREEN_SHIFT_Y = 56;
     public final int tileSpeed = 1;
     public final int FPS = 120;
 
