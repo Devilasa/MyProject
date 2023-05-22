@@ -13,18 +13,23 @@ public class Spaceship extends Entity {
     GamePanel gamePanel;
     KeyHandler keyHandler;
 
+
+
     public Spaceship(GamePanel gamePanel, KeyHandler keyHandler){
         this.gamePanel = gamePanel;
         this.keyHandler = keyHandler;
+        TEXTURE_SHIFT_X = 15;
+        TEXTURE_SHIFT_Y = 11;
 
         setDefaultValues();
+        solidArea = new Rectangle(TEXTURE_SHIFT_X + x, TEXTURE_SHIFT_Y + y, 36, 38);
         getPlayerImage();
     }
 
     public void setDefaultValues(){
         x = 460;
-        y = 384;
-        speed = 2;
+        y = 380;
+        speed = 5;
         direction = "standing";
     }
 
@@ -62,6 +67,27 @@ public class Spaceship extends Entity {
             direction = "standing";
         }
 
+        if (x > gamePanel.screenWidth - gamePanel.SCREEN_SHIFT_X) {
+            x = -gamePanel.SCREEN_SHIFT_X;
+        } else if(x < -gamePanel.SCREEN_SHIFT_X){
+            x = gamePanel.screenWidth - gamePanel.SCREEN_SHIFT_X;
+        }
+        if(y > gamePanel.screenHeight - gamePanel.SCREEN_SHIFT_Y){
+            y = gamePanel.screenHeight - gamePanel.SCREEN_SHIFT_Y;
+        } else if(y < 0){
+            y = 0;
+        }
+
+        solidArea.x = x + TEXTURE_SHIFT_X;
+        solidArea.y = y + TEXTURE_SHIFT_Y;
+
+        collision = false;
+        gamePanel.collisionChecker.checkCollision(this);
+        if(collision){
+            //gamePanel.gameThread = null;
+            System.out.println("COLLISION!");
+        }
+
         spriteCounter++;
         if(spriteCounter > 10){
             if(spriteNumber == 1){
@@ -71,6 +97,7 @@ public class Spaceship extends Entity {
             }
             spriteCounter = 0;
         }
+
     }
 
     public void draw(Graphics2D graphics2D){
@@ -111,16 +138,6 @@ public class Spaceship extends Entity {
                     image = right2;
                 }
             }
-        }
-        if (x > gamePanel.screenWidth - gamePanel.SCREEN_SHIFT_X) {
-            x = -gamePanel.SCREEN_SHIFT_X;
-        } else if(x < -gamePanel.SCREEN_SHIFT_X){
-            x = gamePanel.screenWidth - gamePanel.SCREEN_SHIFT_X;
-        }
-        if(y > gamePanel.screenHeight - gamePanel.SCREEN_SHIFT_Y){
-            y = gamePanel.screenHeight - gamePanel.SCREEN_SHIFT_Y;
-        } else if(y < 0){
-            y = 0;
         }
         graphics2D.drawImage(image, x, y, gamePanel.tileSize, gamePanel.tileSize, null);
     }

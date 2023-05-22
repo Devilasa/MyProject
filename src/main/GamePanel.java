@@ -1,11 +1,13 @@
 package main;
 
 import entity.Asteroid;
+import entity.Entity;
 import entity.Spaceship;
 import tile.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class GamePanel extends JPanel  implements Runnable {
     //SCREEN SETTINGS
@@ -24,10 +26,12 @@ public class GamePanel extends JPanel  implements Runnable {
     TileManager tileManager1 = new TileManager(this);
     TileManager tileManager2 = new TileManager(this);
     KeyHandler keyHandler = new KeyHandler();
-    Thread gameThread;
-    Spaceship spaceship = new Spaceship(this, keyHandler);
+    public Thread gameThread;
+    public CollisionChecker collisionChecker = new CollisionChecker(this);
 
-    Asteroid asteroid1 = new Asteroid(this, 3);
+    public ArrayList<Entity> entitiesList = new ArrayList<>();
+    public Spaceship spaceship = new Spaceship(this, keyHandler);
+    public Asteroid asteroid1 = new Asteroid(this, 3);
 
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -35,7 +39,12 @@ public class GamePanel extends JPanel  implements Runnable {
         this.setDoubleBuffered(true);
         this.addKeyListener(keyHandler);
         this.setFocusable(true);
+
         tileManager2.y = -screenHeight;
+
+        entitiesList.add(spaceship);
+        entitiesList.add(asteroid1);
+
     }
 
     public void startGameThread() {
@@ -65,7 +74,7 @@ public class GamePanel extends JPanel  implements Runnable {
                 drawCount++;
             }
             if(timer >= 1000000000){
-                System.out.println("FPS:"+drawCount);
+                //System.out.println("FPS:"+drawCount);
                 drawCount = 0;
                 timer = 0;
             }

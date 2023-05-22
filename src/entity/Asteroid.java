@@ -19,7 +19,12 @@ public class Asteroid extends Entity{
     public Asteroid(GamePanel gamePanel, int AsteroidType) {
         this.gamePanel = gamePanel;
         this.AsteroidType = AsteroidType;
+        TEXTURE_SHIFT_X = 4;
+        TEXTURE_SHIFT_Y = 3;
+
         setDefaultValue();
+        solidArea = new Rectangle( x + TEXTURE_SHIFT_X, y + TEXTURE_SHIFT_Y, 26, 26);
+
         getAsteroidImage();
     }
 
@@ -69,7 +74,9 @@ public class Asteroid extends Entity{
     }
 
     public void update(){
-        if(y > gamePanel.screenHeight) y = 0;
+        if(y > gamePanel.screenHeight){
+            y = 0;
+        }
         y += speed;
         if(x > gamePanel.screenWidth){
             Random rng = new Random();
@@ -77,6 +84,17 @@ public class Asteroid extends Entity{
             y = 0;
         }
         x += speed;
+
+        solidArea.x = x + TEXTURE_SHIFT_X;
+        solidArea.y = y + TEXTURE_SHIFT_Y;
+
+        collision = false;
+        gamePanel.collisionChecker.checkCollision(this);
+        if(collision){
+            System.out.println("SCOPPIO!");
+        }
+
+
 
         spriteCounter++;
         if(spriteCounter>10) {
@@ -100,6 +118,6 @@ public class Asteroid extends Entity{
             case "down" -> image = down1;
             case "left" -> image = left1;
         }
-        graphics2D.drawImage(image, x, y, gamePanel.tileSize / 2 , gamePanel.tileSize, null);
+        graphics2D.drawImage(image, x, y, gamePanel.tileSize / 2, gamePanel.tileSize, null);
     }
 }

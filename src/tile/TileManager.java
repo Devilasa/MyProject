@@ -85,26 +85,6 @@ public class TileManager {
         }
     }
 
-    public void updateMap(){
-        for(int row = gamePanel.maxScreenRow - 1; row > 0; --row){
-            for(int col = 0; col < gamePanel.maxScreenCol; ++col){
-                mapTileNumber[col][row] = mapTileNumber[col][row-1];
-            }
-        }
-        RandomGenerator rng = RandomGenerator.getDefault();
-        for(int col = 0; col < gamePanel.maxScreenCol; ++col){
-            int number = rng.nextInt(0,tilesNumber);
-            if(number == 7 || number == 8){
-                if(tracer[number] < 18){
-                    ++tracer[number];
-                    number = 3;
-                } else {
-                    tracer[number] = 0;
-                }
-            }
-            mapTileNumber[col][0] = number;
-        }
-    }
     public void draw(Graphics2D graphics2D) {
         int x1 = 0;
         int y1 = y;
