@@ -22,8 +22,8 @@ public class Spaceship extends Entity {
     }
 
     public void setDefaultValues(){
-        x = 100;
-        y = 100;
+        x = 460;
+        y = 384;
         speed = 2;
         direction = "standing";
     }
@@ -111,6 +111,11 @@ public class Spaceship extends Entity {
                     image = right2;
                 }
             }
+        }
+        if (x > gamePanel.screenWidth) {
+            x = 0;
+        } else if(x < 0){
+            x = gamePanel.screenWidth;
         }
         graphics2D.drawImage(image, x, y, gamePanel.tileSize, gamePanel.tileSize, null);
     }
