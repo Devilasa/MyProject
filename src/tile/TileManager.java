@@ -22,7 +22,6 @@ public class TileManager {
 
         tile = new Tile[10];
         tracer = new int[tilesNumber];
-        mapTileNumber = new int[gamePanel.maxScreenCol][gamePanel.maxScreenRow];
         y = 0;
         getTileImages();
         loadMap();
@@ -68,6 +67,7 @@ public class TileManager {
     }
 
     public void loadMap(){
+        mapTileNumber = new int[gamePanel.maxScreenCol][gamePanel.maxScreenRow];
         RandomGenerator rng = RandomGenerator.getDefault();
         for(int row = 0; row < gamePanel.maxScreenRow; ++row){
             for(int col = 0; col < gamePanel.maxScreenCol; ++col){

@@ -22,7 +22,6 @@ public class GamePanel extends JPanel  implements Runnable {
 
     TileManager tileManager1 = new TileManager(this);
     TileManager tileManager2 = new TileManager(this);
-    TileManager tileManager3 = new TileManager(this);
     KeyHandler keyHandler = new KeyHandler();
     Thread gameThread;
     Spaceship spaceship = new Spaceship(this, keyHandler);
@@ -35,7 +34,6 @@ public class GamePanel extends JPanel  implements Runnable {
         this.setDoubleBuffered(true);
         this.addKeyListener(keyHandler);
         this.setFocusable(true);
-        tileManager3.y = -2 * screenHeight;
         tileManager2.y = -screenHeight;
     }
 
@@ -85,29 +83,22 @@ public class GamePanel extends JPanel  implements Runnable {
 
 
         if(tileManager1.y < screenHeight) {
-            tileManager3.y += tileSpeed;
             tileManager2.y += tileSpeed;
             tileManager1.y += tileSpeed;
         } else {
-            TileManager tmp = tileManager3;
-            tileManager3.mapTileNumber = tileManager1.mapTileNumber;
+
             tileManager1.mapTileNumber = tileManager2.mapTileNumber;
-            tileManager2.mapTileNumber = tmp.mapTileNumber;
+            tileManager2.loadMap();
 
-            tileManager3.loadMap();
-
-            tileManager3.y = -2 * screenHeight;
             tileManager2.y = -screenHeight;
             tileManager1.y = 0;
         }
 
         tileManager1.draw(graphics2D);
         tileManager2.draw(graphics2D);
-        tileManager3.draw(graphics2D);
+
         spaceship.draw(graphics2D);
         asteroid1.draw(graphics2D);
-
-
         graphics2D.dispose();
 
     }
