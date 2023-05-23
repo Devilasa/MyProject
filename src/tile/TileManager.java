@@ -31,34 +31,34 @@ public class TileManager {
 
         try {
                 tile[0] = new Tile();
-                tile[0].image = ImageIO.read(new File("res/tiles/cielo_stellato_1.png"));
+                tile[0].image = ImageIO.read(new File("res/tiles/sky_tile_1.png"));
 
                 tile[1] = new Tile();
-                tile[1].image = ImageIO.read(new File("res/tiles/cielo_stellato_2.png"));
+                tile[1].image = ImageIO.read(new File("res/tiles/sky_tile_2.png"));
 
                 tile[2] = new Tile();
-                tile[2].image = ImageIO.read(new File("res/tiles/cielo_stellato_3.png"));
+                tile[2].image = ImageIO.read(new File("res/tiles/sky_tile_3.png"));
 
                 tile[3] = new Tile();
-                tile[3].image = ImageIO.read(new File("res/tiles/cielo_stellato_4.png"));
+                tile[3].image = ImageIO.read(new File("res/tiles/sky_tile_4.png"));
 
                 tile[4] = new Tile();
-                tile[4].image = ImageIO.read(new File("res/tiles/cielo_stellato_5.png"));
+                tile[4].image = ImageIO.read(new File("res/tiles/sky_tile_5.png"));
 
                 tile[5] = new Tile();
-                tile[5].image = ImageIO.read(new File("res/tiles/cielo_stellato_6.png"));
+                tile[5].image = ImageIO.read(new File("res/tiles/sky_tile_6.png"));
 
                 tile[6] = new Tile();
-                tile[6].image = ImageIO.read(new File("res/tiles/cielo_stellato_7.png"));
+                tile[6].image = ImageIO.read(new File("res/tiles/sky_tile_7.png"));
 
                 tile[7] = new Tile();
-                tile[7].image = ImageIO.read(new File("res/tiles/cielo_stellato_8.png"));
+                tile[7].image = ImageIO.read(new File("res/tiles/sky_tile_8.png"));
 
                 tile[8] = new Tile();
-                tile[8].image = ImageIO.read(new File("res/tiles/cielo_stellato_9.png"));
+                tile[8].image = ImageIO.read(new File("res/tiles/sky_tile_9.png"));
 
                 tile[9] = new Tile();
-                tile[9].image = ImageIO.read(new File("res/tiles/cielo_stellato_10.png"));
+                tile[9].image = ImageIO.read(new File("res/tiles/sky_tile_10.png"));
 
 
         } catch (IOException e){
