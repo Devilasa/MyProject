@@ -38,12 +38,12 @@ public class Spaceship extends Entity {
 
     public void getPlayerImage(){
         try {
-            standing = ImageIO.read(new File("res/spaceship/nave_spaziale_ferma.png"));
-            up1 = ImageIO.read(new File("res/spaceship/nave_spaziale_accesa_2.png"));
-            down1 = ImageIO.read(new File("res/spaceship/nave_spaziale_alto_2.png"));
-            left1 = ImageIO.read(new File("res/spaceship/nave_spaziale_left_2.png"));
-            right1 = ImageIO.read(new File("res/spaceship/nave_spaziale_right_2.png"));
-            bonus = ImageIO.read(new File("res/spaceship/esplosione_nave.png"));
+            standing = ImageIO.read(new File("res/spaceship/spaceship_standing.png"));
+            up1 = ImageIO.read(new File("res/spaceship/spaceship_up.png"));
+            down1 = ImageIO.read(new File("res/spaceship/spaceship_down.png"));
+            left1 = ImageIO.read(new File("res/spaceship/spaceship_left.png"));
+            right1 = ImageIO.read(new File("res/spaceship/spaceship_right.png"));
+            bonus = ImageIO.read(new File("res/spaceship/spaceship_explosion.png"));
 
         } catch(IOException e){
             e.printStackTrace();
