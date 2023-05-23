@@ -53,22 +53,22 @@ public class Asteroid extends Entity{
         switch (AsteroidType) {
             case 1 -> {
                 try {
-                    up1 = ImageIO.read(new File("res/asteroid/asteroide_fuoco_sopra1.png"));
-                    down1 = ImageIO.read(new File("res/asteroid/asteroide_fuoco_sopra2.png"));
-                    left1 = ImageIO.read(new File("res/asteroid/asteroide_fuoco_sopra3.png"));
-                    right1 = ImageIO.read(new File("res/asteroid/asteroide_fuoco_sopra4.png"));
-                    bonus = ImageIO.read(new File("res/asteroid/esplosione.png"));
+                    up1 = ImageIO.read(new File("res/asteroid/asteroid_top_1.png"));
+                    down1 = ImageIO.read(new File("res/asteroid/asteroid_top_2.png"));
+                    left1 = ImageIO.read(new File("res/asteroid/asteroid_top_3.png"));
+                    right1 = ImageIO.read(new File("res/asteroid/asteroid_top_4.png"));
+                    bonus = ImageIO.read(new File("res/asteroid/explosion.png"));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
             case 2 -> {
                 try {
-                    up1 = ImageIO.read(new File("res/asteroid/asteroide_fuoco1.png"));
-                    right1 = ImageIO.read(new File("res/asteroid/asteroide_fuoco2.png"));
-                    down1 = ImageIO.read(new File("res/asteroid/asteroide_fuoco3.png"));
-                    left1 = ImageIO.read(new File("res/asteroid/asteroide_fuoco4.png"));
-                    bonus = ImageIO.read(new File("res/asteroid/esplosione.png"));
+                    up1 = ImageIO.read(new File("res/asteroid/asteroid_top_right_1.png"));
+                    right1 = ImageIO.read(new File("res/asteroid/asteroid_top_right_2.png"));
+                    down1 = ImageIO.read(new File("res/asteroid/asteroid_top_right_3.png"));
+                    left1 = ImageIO.read(new File("res/asteroid/asteroid_top_right_4.png"));
+                    bonus = ImageIO.read(new File("res/asteroid/explosion.png"));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -79,7 +79,7 @@ public class Asteroid extends Entity{
                     right1 = ImageIO.read(new File("res/asteroid/asteroid_blue_2.png"));
                     down1 = ImageIO.read(new File("res/asteroid/asteroid_blue_3.png"));
                     left1 = ImageIO.read(new File("res/asteroid/asteroid_blue_2.png"));
-                    bonus = ImageIO.read(new File("res/asteroid/esplosione.png"));
+                    bonus = ImageIO.read(new File("res/asteroid/explosion.png"));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
