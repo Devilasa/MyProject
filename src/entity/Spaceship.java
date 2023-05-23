@@ -18,18 +18,21 @@ public class Spaceship extends Entity {
     public Spaceship(GamePanel gamePanel, KeyHandler keyHandler){
         this.gamePanel = gamePanel;
         this.keyHandler = keyHandler;
+
         TEXTURE_SHIFT_X = 15;
         TEXTURE_SHIFT_Y = 11;
 
         setDefaultValues();
-        solidArea = new Rectangle(TEXTURE_SHIFT_X + x, TEXTURE_SHIFT_Y + y, 36, 38);
         getPlayerImage();
+
+        solidArea = new Rectangle(TEXTURE_SHIFT_X + x, TEXTURE_SHIFT_Y + y, 36, 38);
+
     }
 
     public void setDefaultValues(){
         x = 460;
         y = 380;
-        speed = 5;
+        speed = 4;
         direction = "standing";
     }
 
@@ -37,14 +40,10 @@ public class Spaceship extends Entity {
         try {
             standing = ImageIO.read(new File("res/spaceship/nave_spaziale_ferma.png"));
             up1 = ImageIO.read(new File("res/spaceship/nave_spaziale_accesa_2.png"));
-            up2 = ImageIO.read(new File("res/spaceship/nave_spaziale_accesa_2.png"));
             down1 = ImageIO.read(new File("res/spaceship/nave_spaziale_alto_2.png"));
-            down2 = ImageIO.read(new File("res/spaceship/nave_spaziale_alto_2.png"));
             left1 = ImageIO.read(new File("res/spaceship/nave_spaziale_left_2.png"));
-            left2 = ImageIO.read(new File("res/spaceship/nave_spaziale_left_2.png"));
             right1 = ImageIO.read(new File("res/spaceship/nave_spaziale_right_2.png"));
-            right2 = ImageIO.read(new File("res/spaceship/nave_spaziale_right_2.png"));
-            bonus = ImageIO.read(new File("res/spaceship/esplosione1.png"));
+            bonus = ImageIO.read(new File("res/spaceship/esplosione_nave.png"));
 
         } catch(IOException e){
             e.printStackTrace();
@@ -52,20 +51,22 @@ public class Spaceship extends Entity {
     }
 
     public void update(){
-        if(keyHandler.upPressed){
-            direction = "up";
-            y -= speed;
-        } else if (keyHandler.downPressed) {
-            direction = "down";
-            y += speed;
-        } else if (keyHandler.leftPressed){
-            direction = "left";
-            x -= speed;
-        } else if (keyHandler.rightPressed){
-            direction = "right";
-            x += speed;
-        } else {
-            direction = "standing";
+        if(!direction.equals("explosion")) {
+            if (keyHandler.upPressed) {
+                direction = "up";
+                y -= speed;
+            } else if (keyHandler.downPressed) {
+                direction = "down";
+                y += speed;
+            } else if (keyHandler.leftPressed) {
+                direction = "left";
+                x -= speed;
+            } else if (keyHandler.rightPressed) {
+                direction = "right";
+                x += speed;
+            } else {
+                direction = "standing";
+            }
         }
 
         if (x > gamePanel.screenWidth - gamePanel.SCREEN_SHIFT_X) {
@@ -80,23 +81,13 @@ public class Spaceship extends Entity {
         }
 
         updateSolidArea();
-
         collision = false;
         gamePanel.collisionChecker.checkCollision(this);
         if(collision){
+            direction = "explosion";
            // gamePanel.gameThread = null;
 
             System.out.println("COLLISION!");
-        }
-
-        spriteCounter++;
-        if(spriteCounter > 10){
-            if(spriteNumber == 1){
-                spriteNumber = 2;
-            } else {
-                spriteNumber = 1;
-            }
-            spriteCounter = 0;
         }
 
     }
@@ -107,38 +98,11 @@ public class Spaceship extends Entity {
 
         switch(direction){
             case "standing" -> image = standing;
-            case "up" -> {
-                if(spriteNumber == 1){
-                    image = up1;
-                }
-                if (spriteNumber == 2) {
-                    image = up2;
-                }
-            }
-            case "down" -> {
-                if(spriteNumber == 1){
-                    image = down1;
-                }
-                if (spriteNumber == 2) {
-                    image = down2;
-                }
-            }
-            case "left" -> {
-                if(spriteNumber == 1){
-                    image = left1;
-                }
-                if (spriteNumber == 2) {
-                    image = left2;
-                }
-            }
-            case "right" -> {
-                if(spriteNumber == 1){
-                    image = right1;
-                }
-                if (spriteNumber == 2) {
-                    image = right2;
-                }
-            }
+            case "up" -> image = up1;
+            case "down" -> image = down1;
+            case "left" -> image = left1;
+            case "right" -> image = right1;
+            case "explosion" -> image = bonus;
         }
         graphics2D.drawImage(image, x, y, gamePanel.tileSize, gamePanel.tileSize, null);
     }
