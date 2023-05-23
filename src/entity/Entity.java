@@ -27,6 +27,10 @@ public class Entity {
 
     int TEXTURE_SHIFT_X;
     int TEXTURE_SHIFT_Y;
+    public void update(){
+    }
+    public void draw(Graphics2D graphics2D){
+    }
 
     public void updateSolidArea(){
         solidArea.x = x + TEXTURE_SHIFT_X;

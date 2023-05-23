@@ -1,8 +1,6 @@
 package main;
 
-import entity.Asteroid;
-import entity.Entity;
-import entity.Spaceship;
+import entity.*;
 import tile.TileManager;
 
 import javax.swing.*;
@@ -31,9 +29,9 @@ public class GamePanel extends JPanel  implements Runnable {
 
     public ArrayList<Entity> entitiesList = new ArrayList<>();
     public Spaceship spaceship = new Spaceship(this, keyHandler);
-    public Asteroid asteroid1 = new Asteroid(this, 3);
-    public Asteroid asteroid2 = new Asteroid(this, 2);
-    public Asteroid asteroid3 = new Asteroid(this, 1);
+    public Asteroid blueAsteroid1 = new BlueAsteroid(this);
+    public Asteroid topAsteroid1 = new TopAsteroid(this);
+    public Asteroid topRightAsteroid1 = new TopRightAsteroid(this);
 
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -45,9 +43,9 @@ public class GamePanel extends JPanel  implements Runnable {
         tileManager2.y = -screenHeight;
 
         entitiesList.add(spaceship);
-        entitiesList.add(asteroid1);
-        entitiesList.add(asteroid2);
-        entitiesList.add(asteroid3);
+        entitiesList.add(blueAsteroid1);
+        entitiesList.add(topAsteroid1);
+        entitiesList.add(topRightAsteroid1);
 
     }
 
@@ -87,10 +85,9 @@ public class GamePanel extends JPanel  implements Runnable {
 
     public void update(){
 
-        spaceship.update();
-        asteroid1.update();
-        asteroid2.update();
-        asteroid3.update();
+       for(Entity entity : entitiesList){
+           entity.update();
+       }
 
     }
     public void paintComponent(Graphics graphics) {
@@ -113,12 +110,10 @@ public class GamePanel extends JPanel  implements Runnable {
         tileManager1.draw(graphics2D);
         tileManager2.draw(graphics2D);
 
-        spaceship.draw(graphics2D);
-        asteroid1.draw(graphics2D);
-        asteroid2.draw(graphics2D);
-        asteroid3.draw(graphics2D);
+        for(Entity entity : entitiesList){
+            entity.draw(graphics2D);
+        }
         graphics2D.dispose();
-
     }
 
 }
