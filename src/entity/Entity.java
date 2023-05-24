@@ -18,7 +18,6 @@ public class Entity {
     public String direction;
 
     public int spriteCounter = 0;
-    public int spriteNumber = 1;
 
     public Rectangle solidArea;
     public boolean collision = false;

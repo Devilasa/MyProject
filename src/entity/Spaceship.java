@@ -56,7 +56,7 @@ public class Spaceship extends Entity {
             down = ImageIO.read(new File("res/spaceship/spaceship_broken_2.png"));
             left = ImageIO.read(new File("res/spaceship/spaceship_broken_3.png"));
             right = ImageIO.read(new File("res/spaceship/spaceship_broken_4.png"));
-            standing = ImageIO.read(new File("res/spaceship/spaceship_broken_5.png"));
+            end = ImageIO.read(new File("res/spaceship/spaceship_broken_5.png"));
 
         } catch(IOException e){
             e.printStackTrace();
@@ -80,12 +80,12 @@ public class Spaceship extends Entity {
                 direction = "right";
             }
             if(spriteCounter == DEATH_ANIMATION_SPEED_MULTIPLIER * 5) {
-                direction = "standing";
+                direction = "death";
                 x -= 64;
                 y -= 64;
                 spriteCounter = 1;
             }
-            if(!direction.equals("standing")){
+            if(!direction.equals("death")){
                 spriteCounter++;
             }
         } else {
@@ -143,6 +143,7 @@ public class Spaceship extends Entity {
             case "left" -> image = left;
             case "right" -> image = right;
             case "explosion" -> image = bonus;
+            case "death" -> image = end;
         }
 
         graphics2D.drawImage(image, x, y, image.getWidth(), image.getHeight(), null);
