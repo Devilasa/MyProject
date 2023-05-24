@@ -32,7 +32,7 @@ public class Spaceship extends Entity {
     public void setDefaultValues(){
         x = 460;
         y = 380;
-        speed = 4;
+        speed = 3;
         direction = "standing";
     }
 
