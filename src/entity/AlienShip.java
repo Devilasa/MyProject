@@ -9,6 +9,10 @@ import java.io.IOException;
 import java.util.Random;
 
 public class AlienShip extends Asteroid {
+
+
+    int func = 1;
+    int counter = 0;
     public AlienShip(GamePanel gamePanel) {
         super(gamePanel);
 
@@ -28,7 +32,7 @@ public class AlienShip extends Asteroid {
         Random rng = new Random();
         x = gamePanel.screenWidth + 40;
         y = rng.nextInt(10, gamePanel.screenHeight - 20);
-        speed = 2;
+        speed = 1;
         direction = "up";
     }
 
@@ -60,9 +64,24 @@ public class AlienShip extends Asteroid {
             x += 1;
             y += 1;
         } else {
-            x -= speed;
+            if(func == 1){
+                x -= speed + 1;
+                y -= speed;
+                if(counter > 100){
+                    func = 2;
+                    counter = 0;
+                }
+            } else {
+                x -= speed + 1;
+                y += speed;
+                if(counter > 100){
+                    func = 1;
+                    counter = 0;
+                }
+            }
+            ++counter;
         }
-        if (x < -gamePanel.screenWidth*2) {
+        if (x < -gamePanel.screenWidth) {
             respawn();
         }
         if (y > gamePanel.screenHeight*2) {
