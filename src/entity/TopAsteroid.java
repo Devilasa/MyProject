@@ -16,15 +16,18 @@ public class TopAsteroid extends Asteroid{
         TEXTURE_SHIFT_X = 18;
         TEXTURE_SHIFT_Y = 26;
         RESPAWN_COUNTER_TARGET = 8;
+
         setDefaultValue();
-        solidArea = new Rectangle( x + TEXTURE_SHIFT_X, y + TEXTURE_SHIFT_Y, 30, 29);
         getAsteroidImage();
+
+        solidArea = new Rectangle( x + TEXTURE_SHIFT_X, y + TEXTURE_SHIFT_Y, 30, 29);
+
     }
 
     @Override
     public void setDefaultValue() {
         Random rng = new Random();
-        x = rng.nextInt(0, gamePanel.screenWidth);
+        x = rng.nextInt(0, gamePanel.screenWidth - 20);
         y = -50;
         speed = 3;
         direction = "up";
@@ -33,7 +36,7 @@ public class TopAsteroid extends Asteroid{
     @Override
     public void respawn() {
         Random rng = new Random();
-        x = rng.nextInt(0, gamePanel.screenWidth);
+        x = rng.nextInt(0, gamePanel.screenWidth - 20);
         y = -50;
         updateSolidArea();
         ++respawnCounter;

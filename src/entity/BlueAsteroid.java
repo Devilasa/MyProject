@@ -17,8 +17,9 @@ public class BlueAsteroid extends Asteroid{
         RESPAWN_COUNTER_TARGET = 6;
 
         setDefaultValue();
-        solidArea = new Rectangle( x + TEXTURE_SHIFT_X, y + TEXTURE_SHIFT_Y, 52, 32);
         getAsteroidImage();
+
+        solidArea = new Rectangle( x + TEXTURE_SHIFT_X, y + TEXTURE_SHIFT_Y, 52, 32);
     }
 
     @Override
@@ -78,7 +79,7 @@ public class BlueAsteroid extends Asteroid{
             if(collisionCounter == 1){
                 solidArea.y = -100;
             }
-            if (collisionCounter == 60) {
+            if (collisionCounter == 80) {
                 collisionCounter = 0;
                 collision = false;
                 direction = "up";

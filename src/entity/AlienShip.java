@@ -8,27 +8,26 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Random;
 
-public class TopRightAsteroid extends Asteroid{
-    public TopRightAsteroid (GamePanel gamePanel){
+public class AlienShip extends Asteroid {
+    public AlienShip(GamePanel gamePanel) {
         super(gamePanel);
 
-        TEXTURE_SHIFT_X = 12;
-        TEXTURE_SHIFT_Y = 30;
-
+        TEXTURE_SHIFT_X = 8;
+        TEXTURE_SHIFT_Y = 23;
         RESPAWN_COUNTER_TARGET = 6;
 
         setDefaultValue();
-        getAsteroidImage();
+        getAlienImage();
 
-        solidArea = new Rectangle( x + TEXTURE_SHIFT_X, y + TEXTURE_SHIFT_Y, 30, 29);
+        solidArea = new Rectangle(x + TEXTURE_SHIFT_X, y + TEXTURE_SHIFT_Y, 50, 29);
 
     }
 
     @Override
     public void setDefaultValue() {
         Random rng = new Random();
-        x = rng.nextInt(gamePanel.screenWidth / 2, gamePanel.screenWidth);
-        y = -50;
+        x = gamePanel.screenWidth + 40;
+        y = rng.nextInt(10, gamePanel.screenHeight - 20);
         speed = 2;
         direction = "up";
     }
@@ -36,19 +35,17 @@ public class TopRightAsteroid extends Asteroid{
     @Override
     public void respawn() {
         Random rng = new Random();
-        x = rng.nextInt(gamePanel.screenWidth / 2, gamePanel.screenWidth + 40);
-        y = -50;
+        x = gamePanel.screenWidth + 40;
+        y = rng.nextInt(10, gamePanel.screenHeight - 20);
         updateSolidArea();
         ++respawnCounter;
     }
 
-    @Override
-    public void getAsteroidImage() {
+
+    public void getAlienImage() {
         try {
-            up = ImageIO.read(new File("res/asteroid/asteroid_top_right_1.png"));
-            right = ImageIO.read(new File("res/asteroid/asteroid_top_right_2.png"));
-            down = ImageIO.read(new File("res/asteroid/asteroid_top_right_3.png"));
-            left = ImageIO.read(new File("res/asteroid/asteroid_top_right_4.png"));
+            up = ImageIO.read(new File("res/asteroid/alienship_1.png"));
+            down = ImageIO.read(new File("res/asteroid/alienship_2.png"));
             bonus = ImageIO.read(new File("res/asteroid/explosion.png"));
 
         } catch (IOException e){
@@ -56,16 +53,16 @@ public class TopRightAsteroid extends Asteroid{
         }
     }
 
-    public void update(){
+    @Override
+    public void update() {
         if(direction.equals("explosion")) {
             solidArea.y = -100;
             x += 1;
             y += 1;
         } else {
-            y += speed;
             x -= speed;
         }
-        if (x > gamePanel.screenWidth*2) {
+        if (x < -gamePanel.screenWidth*2) {
             respawn();
         }
         if (y > gamePanel.screenHeight*2) {
@@ -81,7 +78,7 @@ public class TopRightAsteroid extends Asteroid{
             if(collisionCounter == 1){
                 solidArea.y = -100;
             }
-            if (collisionCounter == 55) {
+            if (collisionCounter == 60) {
                 collisionCounter = 0;
                 collision = false;
                 direction = "up";
@@ -93,12 +90,10 @@ public class TopRightAsteroid extends Asteroid{
         }
 
         spriteCounter++;
-        if(spriteCounter>10) {
+        if(spriteCounter>28) {
             switch (direction) {
-                case "up" -> direction = "right";
-                case "right" -> direction = "down";
-                case "down" -> direction = "left";
-                case "left" -> direction = "up";
+                case "up" -> direction = "down";
+                case "down" -> direction = "up";
             }
             spriteCounter = 0;
         }

@@ -29,6 +29,7 @@ public class GamePanel extends JPanel  implements Runnable {
 
     public ArrayList<Entity> entitiesList = new ArrayList<>();
     public Spaceship spaceship = new Spaceship(this, keyHandler);
+    public AlienShip alienShip = new AlienShip(this);
     public Asteroid blueAsteroid1 = new BlueAsteroid(this);
     public Asteroid topAsteroid1 = new TopAsteroid(this);
     public Asteroid topRightAsteroid1 = new TopRightAsteroid(this);
@@ -44,6 +45,7 @@ public class GamePanel extends JPanel  implements Runnable {
         tileManager2.y = -screenHeight;
 
         entitiesList.add(spaceship);
+        entitiesList.add(alienShip);
         entitiesList.add(blueAsteroid1);
         entitiesList.add(topAsteroid1);
         entitiesList.add(topRightAsteroid1);
