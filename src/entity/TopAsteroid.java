@@ -15,7 +15,7 @@ public class TopAsteroid extends Asteroid{
 
         TEXTURE_SHIFT_X = 18;
         TEXTURE_SHIFT_Y = 26;
-
+        RESPAWN_COUNTER_TARGET = 8;
         setDefaultValue();
         solidArea = new Rectangle( x + TEXTURE_SHIFT_X, y + TEXTURE_SHIFT_Y, 30, 29);
         getAsteroidImage();
@@ -42,10 +42,10 @@ public class TopAsteroid extends Asteroid{
     @Override
     public void getAsteroidImage() {
         try {
-            up1 = ImageIO.read(new File("res/asteroid/asteroid_top_1.png"));
-            right1 = ImageIO.read(new File("res/asteroid/asteroid_top_2.png"));
-            down1 = ImageIO.read(new File("res/asteroid/asteroid_top_3.png"));
-            left1 = ImageIO.read(new File("res/asteroid/asteroid_top_4.png"));
+            up = ImageIO.read(new File("res/asteroid/asteroid_top_1.png"));
+            right = ImageIO.read(new File("res/asteroid/asteroid_top_2.png"));
+            down = ImageIO.read(new File("res/asteroid/asteroid_top_3.png"));
+            left = ImageIO.read(new File("res/asteroid/asteroid_top_4.png"));
             bonus = ImageIO.read(new File("res/asteroid/explosion.png"));
 
         } catch (IOException e){
@@ -94,7 +94,7 @@ public class TopAsteroid extends Asteroid{
             spriteCounter = 0;
         }
 
-        if(respawnCounter > 8){
+        if(respawnCounter > RESPAWN_COUNTER_TARGET){
             respawnCounter = 0;
             ++speed;
         }

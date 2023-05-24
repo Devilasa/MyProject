@@ -8,15 +8,13 @@ public class Entity {
     public int speed;
 
     public BufferedImage standing;
-    public BufferedImage up1;
-    public BufferedImage up2;
-    public BufferedImage down1;
-    public BufferedImage down2;
-    public BufferedImage left1;
-    public BufferedImage left2;
-    public BufferedImage right1;
-    public BufferedImage right2;
+    public BufferedImage up;
+    public BufferedImage down;
+    public BufferedImage left;
+    public BufferedImage right;
     public BufferedImage bonus;
+
+    public BufferedImage end;
     public String direction;
 
     public int spriteCounter = 0;

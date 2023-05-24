@@ -2,18 +2,15 @@ package entity;
 
 import main.GamePanel;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.Random;
 
 abstract public class Asteroid extends Entity{
 
     GamePanel gamePanel;
+    int RESPAWN_COUNTER_TARGET;
     int respawnCounter = 0;
-    static int collisionCounter = 0;
+    int collisionCounter = 0;
     public Asteroid(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
     }
@@ -28,18 +25,15 @@ abstract public class Asteroid extends Entity{
     public void getAsteroidImage() {
     }
 
-    public void update(){
-    }
-
     public void draw(Graphics2D graphics2D){
 
         BufferedImage image = null;
 
         switch (direction){
-            case "up" -> image = up1;
-            case "right" -> image = right1;
-            case "down" -> image = down1;
-            case "left" -> image = left1;
+            case "up" -> image = up;
+            case "right" -> image = right;
+            case "down" -> image = down;
+            case "left" -> image = left;
             case "explosion" -> image = bonus;
         }
 
