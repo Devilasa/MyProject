@@ -32,7 +32,7 @@ public class GamePanel extends JPanel  implements Runnable {
     public Asteroid blueAsteroid1 = new BlueAsteroid(this);
     public Asteroid topAsteroid1 = new TopAsteroid(this);
     public Asteroid topRightAsteroid1 = new TopRightAsteroid(this);
-    public GameOverDisplay gameOverDisplay = new GameOverDisplay(this);
+    public GameOverDisplay displayGameOver = new GameOverDisplay(this);
 
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -114,7 +114,7 @@ public class GamePanel extends JPanel  implements Runnable {
         for(Entity entity : entitiesList){
             entity.draw(graphics2D);
         }
-        if(spaceship.direction.equals("death")) gameOverDisplay.draw(graphics2D);
+        if(spaceship.direction.equals("death")) displayGameOver.draw(graphics2D);
         graphics2D.dispose();
     }
 
