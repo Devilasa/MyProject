@@ -67,11 +67,16 @@ public class TopAsteroid extends Asteroid{
         if (y > gamePanel.screenHeight*2) {
             respawn();
         }
-        updateSolidArea();
+        if(!direction.equals("explosion")){
+            updateSolidArea();
+        }
 
         gamePanel.collisionChecker.checkCollision(this);
         if(collision) {
             direction = "explosion";
+            if(collisionCounter == 1){
+                solidArea.y = -100;
+            }
             if (collisionCounter == 60) {
                 collisionCounter = 0;
                 collision = false;
