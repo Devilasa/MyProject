@@ -84,6 +84,7 @@ public class Spaceship extends Entity {
                 x -= 64;
                 y -= 64;
                 spriteCounter = 1;
+                solidArea.y = -100;
             }
             if(!direction.equals("death")){
                 spriteCounter++;
@@ -116,8 +117,9 @@ public class Spaceship extends Entity {
         } else if(y < 0){
             y = 0;
         }
-
-        updateSolidArea();
+        if(!direction.equals("death")) {
+            updateSolidArea();
+        }
         collision = false;
         gamePanel.collisionChecker.checkCollision(this);
         if(collision){
