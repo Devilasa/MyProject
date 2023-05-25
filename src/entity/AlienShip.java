@@ -104,7 +104,6 @@ public class AlienShip extends Asteroid {
                 respawn();
             } else {
                 collisionCounter++;
-                System.out.println("Boom!");
             }
         }
 

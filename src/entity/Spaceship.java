@@ -122,14 +122,10 @@ public class Spaceship extends Entity {
         }
         collision = false;
         gamePanel.collisionChecker.checkCollision(this);
-        if(collision){
-            if(spriteCounter == 0) {
-                direction = "up";
-                getFinalPlayerImage();
-                spriteCounter++;
-            }
-
-            System.out.println("COLLISION!");
+        if(collision && spriteCounter == 0){
+            direction = "up";
+            getFinalPlayerImage();
+            spriteCounter++;
         }
 
     }

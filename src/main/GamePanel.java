@@ -20,13 +20,14 @@ public class GamePanel extends JPanel  implements Runnable {
     public final int SCREEN_SHIFT_Y = 56;
     public final int tileSpeed = 1;
     public final int FPS = 120;
+    public Integer score = 0;
 
     TileManager tileManager1 = new TileManager(this);
     TileManager tileManager2 = new TileManager(this);
     KeyHandler keyHandler = new KeyHandler();
     public Thread gameThread;
     public CollisionChecker collisionChecker = new CollisionChecker(this);
-
+    public Rectangle scoreDisplay = new Rectangle(screenWidth / 2 - SCREEN_SHIFT_X, 60, 100, 50);
     public ArrayList<Entity> entitiesList = new ArrayList<>();
     public Spaceship spaceship = new Spaceship(this, keyHandler);
     public AlienShip alienShip1 = new AlienShip(this);
@@ -34,6 +35,8 @@ public class GamePanel extends JPanel  implements Runnable {
     public AlienShip alienShip2 = new AlienShip(this);
 
     public AlienShip alienShip3 = new AlienShip(this);
+
+    public AlienShip alienShip4 = new AlienShip(this);
     public Asteroid blueAsteroid1 = new BlueAsteroid(this);
 
     public Asteroid blueAsteroid2 = new BlueAsteroid(this);
@@ -60,6 +63,7 @@ public class GamePanel extends JPanel  implements Runnable {
         entitiesList.add(alienShip1);
         entitiesList.add(alienShip2);
         entitiesList.add(alienShip3);
+        entitiesList.add(alienShip4);
         entitiesList.add(blueAsteroid1);
         entitiesList.add(blueAsteroid2);
         entitiesList.add(topAsteroid1);
@@ -135,6 +139,14 @@ public class GamePanel extends JPanel  implements Runnable {
             entity.draw(graphics2D);
         }
         if(spaceship.direction.equals("death")) displayGameOver.draw(graphics2D);
+
+        graphics2D.setColor(Color.white);
+        graphics2D.setFont(new Font("Arial", Font.BOLD, 50));
+        graphics2D.drawString(score.toString(), scoreDisplay.x, scoreDisplay.y);
+        if(spaceship.spriteCounter == 0) {
+            score++;
+        }
+
         graphics2D.dispose();
     }
 
