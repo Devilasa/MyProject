@@ -27,7 +27,7 @@ public class GamePanel extends JPanel  implements Runnable {
     KeyHandler keyHandler = new KeyHandler();
     public Thread gameThread;
     public CollisionChecker collisionChecker = new CollisionChecker(this);
-    public Rectangle scoreDisplay = new Rectangle(screenWidth / 2 - SCREEN_SHIFT_X, 60, 100, 50);
+    public Rectangle scoreDisplay = new Rectangle(screenWidth / 2 - SCREEN_SHIFT_X, SCREEN_SHIFT_Y, 100, 50);
     public ArrayList<Entity> entitiesList = new ArrayList<>();
     public Spaceship spaceship = new Spaceship(this, keyHandler);
     public AlienShip alienShip1 = new AlienShip(this);

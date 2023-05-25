@@ -43,6 +43,10 @@ public class Spaceship extends Entity {
             down = ImageIO.read(new File("res/spaceship/spaceship_down.png"));
             left = ImageIO.read(new File("res/spaceship/spaceship_left.png"));
             right = ImageIO.read(new File("res/spaceship/spaceship_right.png"));
+            up_right = ImageIO.read(new File("res/spaceship/spaceship_up_right.png"));
+            up_left = ImageIO.read(new File("res/spaceship/spaceship_up_left.png"));
+            down_right = ImageIO.read(new File("res/spaceship/spaceship_down_right.png"));
+            down_left = ImageIO.read(new File("res/spaceship/spaceship_down_left.png"));
             bonus = ImageIO.read(new File("res/spaceship/spaceship_explosion.png"));
 
         } catch(IOException e){
@@ -90,7 +94,25 @@ public class Spaceship extends Entity {
                 spriteCounter++;
             }
         } else {
-            if (keyHandler.upPressed) {
+            if(!keyHandler.upPressed && !keyHandler.downPressed && !keyHandler.leftPressed && !keyHandler.rightPressed){
+                direction = "standing";
+            } else if (keyHandler.upPressed && keyHandler.rightPressed){
+                direction = "up_right";
+                y -= speed;
+                x += speed;
+            } else if (keyHandler.upPressed && keyHandler.leftPressed) {
+                direction = "up_left";
+                y -= speed;
+                x -= speed;
+            } else if (keyHandler.downPressed && keyHandler.rightPressed) {
+                direction = "down_right";
+                y += speed;
+                x += speed;
+            } else if(keyHandler.downPressed && keyHandler.leftPressed){
+                direction = "down_left";
+                y += speed;
+                x -= speed;
+            } else if (keyHandler.upPressed) {
                 direction = "up";
                 y -= speed;
             } else if (keyHandler.downPressed) {
@@ -102,8 +124,6 @@ public class Spaceship extends Entity {
             } else if (keyHandler.rightPressed) {
                 direction = "right";
                 x += speed;
-            } else {
-                direction = "standing";
             }
         }
 
@@ -140,6 +160,10 @@ public class Spaceship extends Entity {
             case "down" -> image = down;
             case "left" -> image = left;
             case "right" -> image = right;
+            case "up_right" -> image = up_right;
+            case "up_left" -> image = up_left;
+            case "down_right" -> image = down_right;
+            case "down_left" -> image = down_left;
             case "explosion" -> image = bonus;
             case "death" -> image = end;
         }

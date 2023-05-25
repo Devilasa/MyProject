@@ -12,6 +12,10 @@ public class Entity {
     public BufferedImage down;
     public BufferedImage left;
     public BufferedImage right;
+    public BufferedImage up_right;
+    public BufferedImage up_left;
+    public BufferedImage down_right;
+    public BufferedImage down_left;
     public BufferedImage bonus;
 
     public BufferedImage end;

@@ -25,7 +25,7 @@ public class BlueAsteroid extends Asteroid{
     @Override
     public void setDefaultValue() {
         Random rng = new Random();
-        x = rng.nextInt(-40, gamePanel.screenWidth) / 2;
+        x = rng.nextInt(-50, gamePanel.screenWidth) / 2;
         y = -50;
         speed = 2;
         direction = "up";
@@ -34,7 +34,7 @@ public class BlueAsteroid extends Asteroid{
     @Override
     public void respawn() {
         Random rng = new Random();
-        x = rng.nextInt(-20, gamePanel.screenWidth) / 2;
+        x = rng.nextInt(-50, gamePanel.screenWidth) / 2;
         y = -50;
         updateSolidArea();
         ++respawnCounter;
