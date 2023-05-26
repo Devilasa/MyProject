@@ -16,6 +16,7 @@ public class GamePanel extends JPanel  implements Runnable {
     public final int maxScreenRow = 12;
     public final int screenWidth = tileSize * maxScreenCol; // 1024 pixels
     public final int screenHeight = tileSize * maxScreenRow; // 768 pixels
+
     public final int SCREEN_SHIFT_X = 32; // for some reasons the actual screen get shifted of a little value near 32 pixels, this refers to the X coordinate (ScreenWidth)
     public final int SCREEN_SHIFT_Y = 56;
     public final int tileSpeed = 1;
@@ -29,38 +30,30 @@ public class GamePanel extends JPanel  implements Runnable {
     TileManager tileManager1 = new TileManager(this);
     TileManager tileManager2 = new TileManager(this);
     KeyHandler keyHandler = new KeyHandler();
+    Sound sound = new Sound();
     public Thread gameThread;
     public CollisionChecker collisionChecker = new CollisionChecker(this);
     public Rectangle scoreDisplay = new Rectangle(screenWidth / 2 - SCREEN_SHIFT_X, SCREEN_SHIFT_Y, 100, 50);
+
     public ArrayList<Entity> entitiesList = new ArrayList<>();
     public ArrayList<Entity> inGameEntitiesList = new ArrayList<>();
     public Spaceship spaceship = new Spaceship(this, keyHandler);
     public AlienShip alienShip1 = new AlienShip(this);
-
     public AlienShip alienShip2 = new AlienShip(this);
-
     public AlienShip alienShip3 = new AlienShip(this);
-
     public AlienShip alienShip4 = new AlienShip(this);
-
     public AlienShip alienShip5 = new AlienShip(this);
     public AlienShip alienShip6 = new AlienShip(this);
     public Asteroid blueAsteroid1 = new BlueAsteroid(this);
-
     public Asteroid blueAsteroid2 = new BlueAsteroid(this);
     public Asteroid topAsteroid1 = new TopAsteroid(this);
     public Asteroid topAsteroid2 = new TopAsteroid(this);
     public Asteroid topAsteroid3 = new TopAsteroid(this);
     public Asteroid topAsteroid4 = new TopAsteroid(this);
-
-
     public Asteroid topRightAsteroid1 = new TopRightAsteroid(this);
-
     public Asteroid topRightAsteroid2 = new TopRightAsteroid(this);
     public Asteroid topRightAsteroid3 = new TopRightAsteroid(this);
-
     public Asteroid topRightAsteroid4 = new TopRightAsteroid(this);
-
     public GameOverDisplay displayGameOver = new GameOverDisplay(this);
 
     public GamePanel(){
@@ -69,6 +62,8 @@ public class GamePanel extends JPanel  implements Runnable {
         this.setDoubleBuffered(true);
         this.addKeyListener(keyHandler);
         this.setFocusable(true);
+
+        playMusic();
 
         tileManager2.y = -screenHeight;
 
@@ -183,6 +178,15 @@ public class GamePanel extends JPanel  implements Runnable {
         }
 
         graphics2D.dispose();
+    }
+
+    public void playMusic(){
+        sound.setFile();
+        sound.play();
+        sound.loop();
+    }
+    public void stopMusic(){
+        sound.stop();
     }
 
 }
