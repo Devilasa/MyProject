@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class GameOverDisplay extends Entity{
 
-    int scale = 0;
+    public int scale = 0;
     GamePanel gamePanel;
 
     public GameOverDisplay(GamePanel gamePanel) {
@@ -41,7 +41,7 @@ public class GameOverDisplay extends Entity{
     public void draw(Graphics2D graphics2D) {
         graphics2D.drawImage(end, x - scale / 2, y - scale / 2, end.getWidth() + scale, end.getHeight() + scale, null);
         if(scale < 500) {
-            ++scale;
+            scale += 2;
         }
     }
 }

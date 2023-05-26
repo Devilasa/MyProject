@@ -12,7 +12,7 @@ import java.io.IOException;
 public class Spaceship extends Entity {
     GamePanel gamePanel;
     KeyHandler keyHandler;
-    static final int DEATH_ANIMATION_SPEED_MULTIPLIER = 80;
+    static final int DEATH_ANIMATION_SPEED_MULTIPLIER = 70;
 
 
     public Spaceship(GamePanel gamePanel, KeyHandler keyHandler){

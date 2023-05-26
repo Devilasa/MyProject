@@ -10,7 +10,7 @@ import java.util.Random;
 
 public class AlienShip extends Asteroid {
 
-
+    int side;
     int func = 1;
     int counter = 0;
     public AlienShip(GamePanel gamePanel) {
@@ -30,7 +30,12 @@ public class AlienShip extends Asteroid {
     @Override
     public void setDefaultValue() {
         Random rng = new Random();
-        x = gamePanel.screenWidth + 40;
+        side = rng.nextInt(1,3);
+        if(side == 1) {
+            x = gamePanel.screenWidth + 40;
+        } else {
+            x = -40;
+        }
         y = rng.nextInt(10, gamePanel.screenHeight - 20);
         speed = 1;
         direction = "up";
@@ -39,7 +44,12 @@ public class AlienShip extends Asteroid {
     @Override
     public void respawn() {
         Random rng = new Random();
-        x = gamePanel.screenWidth + 40;
+        side = rng.nextInt(1,3);
+        if(side == 1) {
+            x = gamePanel.screenWidth + 40;
+        } else {
+            x = -40;
+        }
         y = rng.nextInt(10, gamePanel.screenHeight - 20);
         updateSolidArea();
         ++respawnCounter;
@@ -64,27 +74,42 @@ public class AlienShip extends Asteroid {
             x += 1;
             y += 1;
         } else {
-            if(func == 1){
-                x -= speed + 1;
-                y -= speed;
-                if(counter > 100){
-                    func = 2;
-                    counter = 0;
+            if(side == 1) {
+                if (func == 1) {
+                    x -= speed + 1;
+                    y -= speed;
+                    if (counter > 100) {
+                        func = 2;
+                        counter = 0;
+                    }
+                } else {
+                    x -= speed + 1;
+                    y += speed;
+                    if (counter > 100) {
+                        func = 1;
+                        counter = 0;
+                    }
                 }
             } else {
-                x -= speed + 1;
-                y += speed;
-                if(counter > 100){
-                    func = 1;
-                    counter = 0;
+                if (func == 1) {
+                    x += speed + 1;
+                    y -= speed;
+                    if (counter > 100) {
+                        func = 2;
+                        counter = 0;
+                    }
+                } else {
+                    x += speed + 1;
+                    y += speed;
+                    if (counter > 100) {
+                        func = 1;
+                        counter = 0;
+                    }
                 }
             }
             ++counter;
         }
-        if (x < -gamePanel.screenWidth) {
-            respawn();
-        }
-        if (y > gamePanel.screenHeight*2) {
+        if (x < -gamePanel.screenWidth + 100 || x > gamePanel.screenWidth + 100) {
             respawn();
         }
         if(!direction.equals("explosion")){

@@ -28,7 +28,9 @@ abstract public class Asteroid extends Entity{
     public void draw(Graphics2D graphics2D){
 
         BufferedImage image = null;
-
+        if(gamePanel.displayGameOver.scale >= 380){
+            direction = "explosion";
+        }
         switch (direction){
             case "up" -> image = up;
             case "right" -> image = right;
