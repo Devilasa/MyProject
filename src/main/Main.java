@@ -12,12 +12,20 @@ public class Main {
         window.setTitle("Box Adventure");
 
         GamePanel gamePanel = new GamePanel();
+        MenuPanel menuPanel = new MenuPanel();
+
+        // window.add(menuPanel);
 
         window.add(gamePanel);
         window.pack();
         window.setLocationRelativeTo(null);
         window.setVisible(true);
 
+
+
+
+
+        // menuPanel.startMenuThread();
         gamePanel.startGameThread();
     }
 }

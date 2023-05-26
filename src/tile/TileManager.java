@@ -5,7 +5,6 @@ import main.GamePanel;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.*;
-import java.util.Random;
 import java.util.random.RandomGenerator;
 
 public class TileManager {

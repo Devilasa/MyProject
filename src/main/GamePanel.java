@@ -26,7 +26,6 @@ public class GamePanel extends JPanel  implements Runnable {
     public Integer score = 0;
 
 
-
     TileManager tileManager1 = new TileManager(this);
     TileManager tileManager2 = new TileManager(this);
     KeyHandler keyHandler = new KeyHandler();
@@ -63,8 +62,6 @@ public class GamePanel extends JPanel  implements Runnable {
         this.addKeyListener(keyHandler);
         this.setFocusable(true);
 
-        playMusic();
-
         tileManager2.y = -screenHeight;
 
         entitiesList.add(spaceship);
@@ -93,6 +90,7 @@ public class GamePanel extends JPanel  implements Runnable {
     }
 
     public void startGameThread() {
+        playMusic();
         gameThread = new Thread(this);
         gameThread.start();
     }
