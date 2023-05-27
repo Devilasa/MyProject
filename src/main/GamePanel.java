@@ -1,5 +1,6 @@
 package main;
 
+
 import entity.*;
 import tile.TileManager;
 
@@ -53,6 +54,7 @@ public class GamePanel extends JPanel  implements Runnable {
     public Asteroid topRightAsteroid2 = new TopRightAsteroid(this);
     public Asteroid topRightAsteroid3 = new TopRightAsteroid(this);
     public Asteroid topRightAsteroid4 = new TopRightAsteroid(this);
+    public FlyingKeyboard flyingKeyboard = new FlyingKeyboard(this);
     public GameOverDisplay displayGameOver = new GameOverDisplay(this);
 
     public GamePanel(){
@@ -85,6 +87,8 @@ public class GamePanel extends JPanel  implements Runnable {
         entitiesList.add(alienShip4);
         entitiesList.add(alienShip5);
         entitiesList.add(alienShip6);
+
+        entitiesList.add(flyingKeyboard);
 
         inGameEntitiesList.add(spaceship);
     }
