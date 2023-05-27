@@ -8,8 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Random;
 
-public class FlyingKeyboard extends Asteroid {
-
+public class FlyingKeyboard extends Asteroid{
     int side;
     public FlyingKeyboard(GamePanel gamePanel) {
         super(gamePanel);
@@ -47,7 +46,7 @@ public class FlyingKeyboard extends Asteroid {
         } else {
             x = -40;
         }
-        y = rng.nextInt(10, gamePanel.screenHeight - 20);
+        y = rng.nextInt(10, gamePanel.screenHeight - 30);
         updateSolidArea();
         ++respawnCounter;
     }
@@ -109,5 +108,6 @@ public class FlyingKeyboard extends Asteroid {
     public void draw(Graphics2D graphics2D) {
         super.draw(graphics2D);
     }
+
 
 }

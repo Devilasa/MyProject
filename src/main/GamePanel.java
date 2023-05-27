@@ -140,6 +140,7 @@ public class GamePanel extends JPanel  implements Runnable {
         Graphics2D graphics2D = (Graphics2D) graphics;
 
 
+
         if(tileManager1.y < screenHeight) {
             tileManager2.y += tileSpeed;
             tileManager1.y += tileSpeed;
