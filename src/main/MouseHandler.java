@@ -1,14 +1,8 @@
 package main;
 
-import entity.BackDisplay;
-import entity.Spaceship;
-import entity.TryAgainDisplay;
-
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import main.GamePanel;
 
 import static main.GamePanel.*;
 
