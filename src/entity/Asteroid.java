@@ -15,9 +15,6 @@ abstract public class Asteroid extends Entity{
         this.gamePanel = gamePanel;
     }
 
-    public void setDefaultValue(){
-    }
-
     public void respawn(){
     }
 
@@ -31,7 +28,6 @@ abstract public class Asteroid extends Entity{
         if(gamePanel.displayGameOver.scale >= 380){
             direction = "explosion";
         }
-
         switch (direction){
             case "up" -> image = up;
             case "right" -> image = right;

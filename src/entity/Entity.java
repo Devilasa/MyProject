@@ -33,8 +33,12 @@ public class Entity {
     public void draw(Graphics2D graphics2D){
     }
 
+    public void setDefaultValue(){
+    }
+
     public void updateSolidArea(){
         solidArea.x = x + TEXTURE_SHIFT_X;
         solidArea.y = y + TEXTURE_SHIFT_Y;
     }
 }
+

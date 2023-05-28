@@ -1,31 +1,24 @@
 package main;
 
 import javax.swing.*;
+import java.sql.SQLException;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         JFrame window = new JFrame();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
-        window.setTitle("Box Adventure");
+        window.setTitle("Space Adventure");
 
         GamePanel gamePanel = new GamePanel();
-        MenuPanel menuPanel = new MenuPanel();
-
-        // window.add(menuPanel);
 
         window.add(gamePanel);
         window.pack();
         window.setLocationRelativeTo(null);
         window.setVisible(true);
 
-
-
-
-
-        // menuPanel.startMenuThread();
         gamePanel.startGameThread();
     }
 }

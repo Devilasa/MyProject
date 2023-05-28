@@ -35,6 +35,8 @@ public class FlyingKeyboard extends Asteroid{
         y = rng.nextInt(10, gamePanel.screenHeight - 20);
         speed = 1;
         direction = "up";
+        respawnCounter = 0;
+        collisionCounter = 0;
     }
 
     @Override

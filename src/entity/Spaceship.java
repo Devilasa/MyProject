@@ -23,7 +23,6 @@ public class Spaceship extends Entity {
         TEXTURE_SHIFT_Y = 11;
 
         setDefaultValues();
-        getPlayerImage();
 
         solidArea = new Rectangle(TEXTURE_SHIFT_X + x, TEXTURE_SHIFT_Y + y, 36, 38);
 
@@ -34,6 +33,8 @@ public class Spaceship extends Entity {
         y = 380;
         speed = 3;
         direction = "standing";
+        spriteCounter = 0;
+        getPlayerImage();
     }
 
     public void getPlayerImage(){
@@ -143,8 +144,8 @@ public class Spaceship extends Entity {
         collision = false;
         gamePanel.collisionChecker.checkCollision(this);
         if(collision && spriteCounter == 0){
-            direction = "up";
             getFinalPlayerImage();
+            direction = "up";
             spriteCounter++;
         }
 

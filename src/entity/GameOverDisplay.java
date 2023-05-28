@@ -40,6 +40,7 @@ public class GameOverDisplay extends Entity{
     @Override
     public void draw(Graphics2D graphics2D) {
         graphics2D.drawImage(end, x - scale / 2, y - scale / 2, end.getWidth() + scale, end.getHeight() + scale, null);
+
         if(scale < 500) {
             scale += 2;
         }

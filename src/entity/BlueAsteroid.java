@@ -29,6 +29,8 @@ public class BlueAsteroid extends Asteroid{
         y = -50;
         speed = 2;
         direction = "up";
+        respawnCounter = 0;
+        collisionCounter = 0;
     }
 
     @Override

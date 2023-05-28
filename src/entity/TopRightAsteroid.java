@@ -1,5 +1,6 @@
 package entity;
 
+
 import main.GamePanel;
 
 import javax.imageio.ImageIO;
@@ -31,6 +32,8 @@ public class TopRightAsteroid extends Asteroid{
         y = -50;
         speed = 2;
         direction = "up";
+        respawnCounter = 0;
+        collisionCounter = 0;
     }
 
     @Override

@@ -85,7 +85,7 @@ public class TileManager {
     }
 
     public void draw(Graphics2D graphics2D) {
-        int x1 = 0;
+        int x1;
         int y1 = y;
 
         for(int row = 0; row < gamePanel.maxScreenRow; ++row){
