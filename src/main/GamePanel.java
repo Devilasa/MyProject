@@ -28,12 +28,12 @@ public class GamePanel extends JPanel  implements Runnable {
     public static String panel = "dashboard";
     public static boolean retry = false;
 
-    static final Rectangle dashboardPlayButton = new Rectangle(390, 390, 250, 50);
-    static final Rectangle leaderboardBackButton = new Rectangle(860, 740, 140, 30);
-    static final Rectangle exitButton = new Rectangle(390, 700, 240, 70);
-    static final Rectangle dashboardLeaderboardButton = new Rectangle(180, 550, 740, 70);
-    static final Rectangle tryAgainButton = new Rectangle(31, 414, 485, 48);
-    static final Rectangle gameOverBackButton = new Rectangle(665, 409, 263, 58);
+    static final Rectangle dashboardPlayButton = new Rectangle(390, 320, 240, 70); //ok
+    static final Rectangle leaderboardBackButton = new Rectangle(860, 700, 140, 40); //ok
+    static final Rectangle exitButton = new Rectangle(390, 600, 230, 100); //ok
+    static final Rectangle dashboardLeaderboardButton = new Rectangle(180, 480, 665, 70); //ok
+    static final Rectangle tryAgainButton = new Rectangle(30, 405, 490, 70);
+    static final Rectangle gameOverBackButton = new Rectangle(665, 405, 245, 70);
     static String Username;
     public static TextField textField = new TextField();
     public static boolean removeTextField = false;
@@ -258,18 +258,18 @@ public class GamePanel extends JPanel  implements Runnable {
                 /* Play */
                 graphics2D.setColor(Color.yellow);
                 graphics2D.setFont(new Font("Algerian", Font.BOLD, 90));
-                graphics2D.drawString("Play", dashboardPlayButton.x, dashboardPlayButton.y);
+                graphics2D.drawString("Play", dashboardPlayButton.x, dashboardPlayButton.y + 70);
 
 
                 /* Leaderboard */
                 graphics2D.setColor(Color.yellow);
                 graphics2D.setFont(new Font("Algerian", Font.BOLD, 90));
-                graphics2D.drawString("Leaderboard", dashboardLeaderboardButton.x, dashboardLeaderboardButton.y);
+                graphics2D.drawString("Leaderboard", dashboardLeaderboardButton.x, dashboardLeaderboardButton.y + 70);
 
                 /* Exit */
                 graphics2D.setColor(Color.yellow);
                 graphics2D.setFont(new Font("Algerian", Font.BOLD, 100));
-                graphics2D.drawString("Exit", exitButton.x, exitButton.y);
+                graphics2D.drawString("Exit", exitButton.x, exitButton.y + 100);
             }
             case "leaderboard" -> {
                 try {
@@ -302,7 +302,7 @@ public class GamePanel extends JPanel  implements Runnable {
                     /* Back */
                     graphics2D.setColor(Color.yellow);
                     graphics2D.setFont(new Font("Algerian", Font.BOLD, 50));
-                    graphics2D.drawString("Back", leaderboardBackButton.x, leaderboardBackButton.y);
+                    graphics2D.drawString("Back", leaderboardBackButton.x, leaderboardBackButton.y + 40);
 
                 } catch (Exception e) {
                     e.printStackTrace();
