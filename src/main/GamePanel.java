@@ -34,16 +34,17 @@ public class GamePanel extends JPanel  implements Runnable {
     static final Rectangle dashboardLeaderboardButton = new Rectangle(179, 482, 743, 71);
     static final Rectangle tryAgainButton = new Rectangle(31, 414, 485, 48);
     static final Rectangle gameOverBackButton = new Rectangle(665, 409, 263, 58);
+    static String Username;
+    public static TextField textField = new TextField();
+    public static boolean removeTextField = false;
+    public static boolean addTextField = false;
     TileManager tileManager1 = new TileManager(this);
     TileManager tileManager2 = new TileManager(this);
     KeyHandler keyHandler = new KeyHandler();
     MouseHandler mouseHandler = new MouseHandler();
     public Thread gameThread;
-
     Sound sound = new Sound();
-
     public static boolean switchSong = false;
-
     public CollisionChecker collisionChecker = new CollisionChecker(this);
     public Rectangle scoreDisplay = new Rectangle(screenWidth / 2 - SCREEN_SHIFT_X, SCREEN_SHIFT_Y, 100, 50);
     public ArrayList<Entity> entitiesList = new ArrayList<>();
@@ -84,6 +85,11 @@ public class GamePanel extends JPanel  implements Runnable {
         this.addKeyListener(keyHandler);
         this.setFocusable(true);
         this.addMouseListener(mouseHandler);
+
+        textField.setBounds(350, 200, 300, 60);
+        textField.setFont(new Font("Algerian", Font.BOLD, 50));
+        textField.setText("Guest1");
+        textField.setBackground(Color.CYAN);
 
         tileManager2.y = -screenHeight;
 
@@ -161,6 +167,14 @@ public class GamePanel extends JPanel  implements Runnable {
             sound.switchSong();
             switchSong = false;
         }
+        if(removeTextField){
+            remove(textField);
+            removeTextField = false;
+        }
+        if(addTextField){
+            add(textField);
+            addTextField = false;
+        }
         if (panel.equals("game")) {
             for(Entity entity : inGameEntitiesList) {
                 entity.update();
@@ -236,6 +250,8 @@ public class GamePanel extends JPanel  implements Runnable {
                 }
             }
             case "dashboard" -> {
+
+
                 Rectangle user = new Rectangle(screenWidth / 2 - 200 - SCREEN_SHIFT_X, SCREEN_SHIFT_Y + 50, 200, 100);
                 graphics2D.setColor(Color.yellow);
                 graphics2D.setFont(new Font("Algerian", Font.BOLD, 100));

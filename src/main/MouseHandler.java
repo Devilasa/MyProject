@@ -32,6 +32,8 @@ public class MouseHandler extends JFrame implements MouseListener {
             panelType = "game";
             switchSong = true;
             retry = true;
+            Username = textField.getText();
+            removeTextField = true;
         }
         else if(dashboardLeaderboardButton.contains(mouseEvent.getPoint()) && panelType.equals("dashboard")) {
             panelType = "leaderboard";
@@ -50,6 +52,7 @@ public class MouseHandler extends JFrame implements MouseListener {
         else if(gameOverBackButton.contains(mouseEvent.getPoint()) && panelType.equals("gameover")) {
             switchSong = true;
             panelType = "dashboard";
+            addTextField = true;
         }
     }
 }
