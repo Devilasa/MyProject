@@ -28,6 +28,7 @@ public class MouseHandler extends JFrame implements MouseListener {
     }
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
+        System.out.println(mouseEvent.getPoint());
         if(dashboardPlayButton.contains(mouseEvent.getPoint()) && panelType.equals("dashboard")) {
             panelType = "game";
             switchSong = true;

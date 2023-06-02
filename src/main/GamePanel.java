@@ -28,10 +28,10 @@ public class GamePanel extends JPanel  implements Runnable {
     public static String panel = "dashboard";
     public static boolean retry = false;
 
-    static final Rectangle dashboardPlayButton = new Rectangle(831, 257, 179, 48);
-    static final Rectangle leaderboardBackButton = new Rectangle(855, 700, 139, 33);
-    static final Rectangle exitButton = new Rectangle(375, 632, 238, 71);
-    static final Rectangle dashboardLeaderboardButton = new Rectangle(179, 482, 743, 71);
+    static final Rectangle dashboardPlayButton = new Rectangle(390, 390, 250, 50);
+    static final Rectangle leaderboardBackButton = new Rectangle(860, 740, 140, 30);
+    static final Rectangle exitButton = new Rectangle(390, 700, 240, 70);
+    static final Rectangle dashboardLeaderboardButton = new Rectangle(180, 550, 740, 70);
     static final Rectangle tryAgainButton = new Rectangle(31, 414, 485, 48);
     static final Rectangle gameOverBackButton = new Rectangle(665, 409, 263, 58);
     static String Username;
@@ -86,7 +86,7 @@ public class GamePanel extends JPanel  implements Runnable {
         this.setFocusable(true);
         this.addMouseListener(mouseHandler);
 
-        textField.setBounds(350, 200, 300, 60);
+        textField.setBounds(370, 170, 300, 60);
         textField.setFont(new Font("Algerian", Font.BOLD, 50));
         textField.setText("Guest1");
         textField.setBackground(Color.CYAN);
@@ -250,63 +250,66 @@ public class GamePanel extends JPanel  implements Runnable {
                 }
             }
             case "dashboard" -> {
+                /* Player :*/
+                graphics2D.setColor(Color.yellow);
+                graphics2D.setFont(new Font("Algerian", Font.BOLD, 80));
+                graphics2D.drawString("Player :", 340, 100);
+
+                /* Play */
+                graphics2D.setColor(Color.yellow);
+                graphics2D.setFont(new Font("Algerian", Font.BOLD, 90));
+                graphics2D.drawString("Play", dashboardPlayButton.x, dashboardPlayButton.y);
 
 
-                Rectangle user = new Rectangle(screenWidth / 2 - 200 - SCREEN_SHIFT_X, SCREEN_SHIFT_Y + 50, 200, 100);
+                /* Leaderboard */
+                graphics2D.setColor(Color.yellow);
+                graphics2D.setFont(new Font("Algerian", Font.BOLD, 90));
+                graphics2D.drawString("Leaderboard", dashboardLeaderboardButton.x, dashboardLeaderboardButton.y);
+
+                /* Exit */
                 graphics2D.setColor(Color.yellow);
                 graphics2D.setFont(new Font("Algerian", Font.BOLD, 100));
-                graphics2D.drawString("PLayer :", user.x, user.y);
-                Rectangle leaderboard = new Rectangle(screenWidth / 2 - 300 - SCREEN_SHIFT_X, SCREEN_SHIFT_Y + 500, 200, 100);
-                graphics2D.setColor(Color.yellow);
-                graphics2D.setFont(new Font("Algerian", Font.BOLD, 100));
-                graphics2D.drawString("Leaderboard", leaderboard.x, leaderboard.y);
-                Rectangle name = new Rectangle(screenWidth / 2 - 100 - SCREEN_SHIFT_X, SCREEN_SHIFT_Y + 650, 200, 100);
-                graphics2D.setColor(Color.yellow);
-                graphics2D.setFont(new Font("Algerian", Font.BOLD, 100));
-                graphics2D.drawString("Exit", name.x, name.y);
-                if (true) {
-                    Rectangle play = new Rectangle(screenWidth / 2 + 350 - SCREEN_SHIFT_X, SCREEN_SHIFT_Y + 250, 100, 50);
-                    graphics2D.setColor(Color.yellow);
-                    graphics2D.setFont(new Font("Algerian", Font.BOLD, 65));
-                    graphics2D.drawString("Play", play.x, play.y);
-                }
+                graphics2D.drawString("Exit", exitButton.x, exitButton.y);
             }
             case "leaderboard" -> {
                 try {
-                    //ResultSet resultSet = statement.executeQuery("select * from videogame order by punteggio desc");
-                    int counts = 1;
-                    int dec = 0; // for some reasons the actual screen get shifted of a little value near 32 pixels, this refers to the X coordinate (ScreenWidth)
-                    while (true) {
-                        String usr = counts + ".";
-                        String usr1 = "gatto"; //resultSet.getString("nome");
-                        String usr2 = "ciao"; //resultSet.getString("punteggio");
-                        Rectangle user = new Rectangle(screenWidth / 2 - 450 - SCREEN_SHIFT_X, SCREEN_SHIFT_Y + dec, 100, 50);
+                    //ResultSet resultSet = statement.executeQuery("select * from videogame order by score desc");
+
+                    int height = 0;
+                    for(int count = 1; count < 8; ++count){
+                        String rank = count + ".";
+                        String user = "ciao sono user"; // resultSet.getString("name");
+                        String score = "chi te l'ha detto"; // resultSet.getString("score");
+
+                        /* Rank */
                         graphics2D.setColor(Color.yellow);
                         graphics2D.setFont(new Font("Algerian", Font.BOLD, 50));
-                        graphics2D.drawString(usr, user.x, user.y);
-                        Rectangle user1 = new Rectangle(screenWidth / 2 - 350 - SCREEN_SHIFT_X, SCREEN_SHIFT_Y + dec, 100, 50);
+                        graphics2D.drawString(rank, 30, SCREEN_SHIFT_Y + height);
+
+                        /* Username */
                         graphics2D.setColor(Color.yellow);
                         graphics2D.setFont(new Font("Algerian", Font.BOLD, 50));
-                        graphics2D.drawString(usr1, user1.x, user1.y);
-                        Rectangle user2 = new Rectangle(screenWidth / 2 + 100 - SCREEN_SHIFT_X, SCREEN_SHIFT_Y + dec, 100, 50);
+                        graphics2D.drawString(user, 130, SCREEN_SHIFT_Y + height);
+
+                        /* Score */
                         graphics2D.setColor(Color.yellow);
                         graphics2D.setFont(new Font("Algerian", Font.BOLD, 50));
-                        graphics2D.drawString(usr2, user2.x, user2.y);
-                        dec += 100;
-                        counts++;
-                        if (counts == 8) {
-                            break;
-                        }
+                        graphics2D.drawString(score, 580, SCREEN_SHIFT_Y + height);
+
+                        height += 100;
                     }
-                    Rectangle quit = new Rectangle(screenWidth / 2 + 375 - SCREEN_SHIFT_X, SCREEN_SHIFT_Y + 680, 100, 50);
+
+                    /* Back */
                     graphics2D.setColor(Color.yellow);
                     graphics2D.setFont(new Font("Algerian", Font.BOLD, 50));
-                    graphics2D.drawString("Back", quit.x, quit.y);
+                    graphics2D.drawString("Back", leaderboardBackButton.x, leaderboardBackButton.y);
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         }
+
         panel = mouseHandler.panelType;
         graphics2D.dispose();
     }
