@@ -28,14 +28,14 @@ public class GamePanel extends JPanel  implements Runnable {
     public static String panel = "dashboard";
     public static boolean retry = false;
 
-    static final Rectangle dashboardPlayButton = new Rectangle(390, 320, 240, 70); //ok
-    static final Rectangle leaderboardBackButton = new Rectangle(860, 700, 140, 40); //ok
-    static final Rectangle exitButton = new Rectangle(390, 600, 230, 100); //ok
-    static final Rectangle dashboardLeaderboardButton = new Rectangle(180, 480, 665, 70); //ok
+    static final Rectangle dashboardPlayButton = new Rectangle(390, 320, 240, 70);
+    static final Rectangle leaderboardBackButton = new Rectangle(860, 700, 140, 40);
+    static final Rectangle exitButton = new Rectangle(390, 600, 230, 100);
+    static final Rectangle dashboardLeaderboardButton = new Rectangle(180, 480, 665, 70);
     static final Rectangle tryAgainButton = new Rectangle(30, 405, 490, 70);
     static final Rectangle gameOverBackButton = new Rectangle(665, 405, 245, 70);
-    static String Username;
-    public static TextField textField = new TextField();
+    static String username;
+    public TextField textField;
     public static boolean removeTextField = false;
     public static boolean addTextField = false;
     TileManager tileManager1 = new TileManager(this);
@@ -86,10 +86,13 @@ public class GamePanel extends JPanel  implements Runnable {
         this.setFocusable(true);
         this.addMouseListener(mouseHandler);
 
+        textField = new TextField();
         textField.setBounds(370, 170, 300, 60);
         textField.setFont(new Font("Algerian", Font.BOLD, 50));
         textField.setText("Guest1");
         textField.setBackground(Color.CYAN);
+        //add(textField);
+        addTextField = true;
 
         tileManager2.y = -screenHeight;
 
@@ -168,10 +171,11 @@ public class GamePanel extends JPanel  implements Runnable {
             switchSong = false;
         }
         if(removeTextField){
+            username = textField.getText();
             remove(textField);
             removeTextField = false;
-        }
-        if(addTextField){
+        } else
+            if(addTextField){
             add(textField);
             addTextField = false;
         }
@@ -278,8 +282,8 @@ public class GamePanel extends JPanel  implements Runnable {
                     int height = 0;
                     for(int count = 1; count < 8; ++count){
                         String rank = count + ".";
-                        String user = "ciao sono user"; // resultSet.getString("name");
-                        String score = "chi te l'ha detto"; // resultSet.getString("score");
+                        String user = "user"; // resultSet.getString("name");
+                        String score = "score"; // resultSet.getString("score");
 
                         /* Rank */
                         graphics2D.setColor(Color.yellow);

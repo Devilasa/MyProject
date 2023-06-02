@@ -28,23 +28,22 @@ public class MouseHandler extends JFrame implements MouseListener {
     }
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
-        System.out.println(mouseEvent.getPoint());
         if(dashboardPlayButton.contains(mouseEvent.getPoint()) && panelType.equals("dashboard")) {
             panelType = "game";
             switchSong = true;
             retry = true;
-            Username = textField.getText();
             removeTextField = true;
         }
         else if(dashboardLeaderboardButton.contains(mouseEvent.getPoint()) && panelType.equals("dashboard")) {
             panelType = "leaderboard";
+            removeTextField = true;
         }
         else if(exitButton.contains(mouseEvent.getPoint()) && panelType.equals("dashboard")) {
             System.exit(0);
-            //System.out.println("Coordinate: "+ mouseEvent.getPoint());
         }
         else if(leaderboardBackButton.contains(mouseEvent.getPoint()) && panelType.equals("leaderboard")) {
             panelType = "dashboard";
+            addTextField = true;
         }
         else if(tryAgainButton.contains(mouseEvent.getPoint()) && panelType.equals("gameover")) {
             panelType = "game";

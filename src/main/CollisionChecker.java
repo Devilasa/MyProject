@@ -1,9 +1,8 @@
 package main;
 
-import entity.Asteroid;
+
 import entity.Entity;
 
-import java.util.ArrayList;
 
 public class CollisionChecker {
     GamePanel gamePanel;
@@ -12,7 +11,7 @@ public class CollisionChecker {
     }
 
     public void checkCollision(Entity entity){
-        for(Entity e : gamePanel.entitiesList){
+        for(Entity e : gamePanel.inGameEntitiesList){
             if(e != entity) {
                 if (entity.solidArea.intersects(e.solidArea)) {
                     entity.collision = true;
