@@ -74,7 +74,7 @@ public class GamePanel extends JPanel  implements Runnable {
 
     //Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/jdbc_video", "root", "Raviolo0_");
     //Statement statement = connection.createStatement();
-
+     //executor service
 
 
 
@@ -86,13 +86,15 @@ public class GamePanel extends JPanel  implements Runnable {
         this.setFocusable(true);
         this.addMouseListener(mouseHandler);
 
+        setLayout(null);
+
         textField = new TextField();
-        textField.setBounds(370, 170, 300, 60);
+        textField.setBounds(365, 170, 300, 60);
         textField.setFont(new Font("Algerian", Font.BOLD, 50));
         textField.setText("Guest1");
         textField.setBackground(Color.CYAN);
-        //add(textField);
-        addTextField = true;
+        textField.setVisible(true);
+        add(textField);
 
         tileManager2.y = -screenHeight;
 
