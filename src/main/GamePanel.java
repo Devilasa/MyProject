@@ -5,7 +5,7 @@ import tile.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 
@@ -71,10 +71,12 @@ public class GamePanel extends JPanel  implements Runnable {
     public TryAgainDisplay tryAgainDisplay = new TryAgainDisplay(this);
     public BackDisplay backDisplay = new BackDisplay(this);
 
+    Connection connection;
 
-    //Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/jdbc_video", "root", "Raviolo0_");
-    //Statement statement = connection.createStatement();
-     //executor service
+    Statement statement;
+    UpdateSqlClass updateSqlClass=new UpdateSqlClass();
+
+
 
 
 
@@ -85,6 +87,7 @@ public class GamePanel extends JPanel  implements Runnable {
         this.addKeyListener(keyHandler);
         this.setFocusable(true);
         this.addMouseListener(mouseHandler);
+
 
         setLayout(null);
 
@@ -97,6 +100,13 @@ public class GamePanel extends JPanel  implements Runnable {
         add(textField);
 
         tileManager2.y = -screenHeight;
+
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/jdbc_video", "root", "Raviolo0_");
+            statement = connection.createStatement();
+        } catch (SQLException e){
+            System.out.println("Connection to database failed!");
+        }
 
         entitiesList.add(spaceship);
 
@@ -177,7 +187,7 @@ public class GamePanel extends JPanel  implements Runnable {
             remove(textField);
             removeTextField = false;
         } else
-            if(addTextField){
+        if(addTextField){
             add(textField);
             addTextField = false;
         }
@@ -210,13 +220,20 @@ public class GamePanel extends JPanel  implements Runnable {
 
         switch (panel) {
             case "gameover" -> {
-                displayGameOver.draw(graphics2D);
-                tryAgainDisplay.draw(graphics2D);
-                backDisplay.draw(graphics2D);
-                graphics2D.setColor(Color.white);
-                graphics2D.setFont(new Font("Arial", Font.BOLD, 50));
-                graphics2D.drawString(score.toString(), scoreDisplay.x, scoreDisplay.y);
-                spaceship.setDefaultValues();
+                try {
+                    updateSqlClass.InsertIntoDatabase(connection,statement,username,score);
+                } catch (Exception ignored) {
+
+                } finally {
+                    displayGameOver.draw(graphics2D);
+                    tryAgainDisplay.draw(graphics2D);
+                    backDisplay.draw(graphics2D);
+                    graphics2D.setColor(Color.white);
+                    graphics2D.setFont(new Font("Arial", Font.BOLD, 50));
+                    graphics2D.drawString(score.toString(), scoreDisplay.x, scoreDisplay.y);
+                    spaceship.setDefaultValues();
+                }
+
             }
             case "game" -> {
                 for (Entity entity : inGameEntitiesList) {
@@ -224,6 +241,7 @@ public class GamePanel extends JPanel  implements Runnable {
                 }
 
                 if (spaceship.direction.equals("death")) {
+
                     displayGameOver.draw(graphics2D);
                     tryAgainDisplay.draw(graphics2D);
                     backDisplay.draw(graphics2D);
@@ -279,13 +297,15 @@ public class GamePanel extends JPanel  implements Runnable {
             }
             case "leaderboard" -> {
                 try {
-                    //ResultSet resultSet = statement.executeQuery("select * from videogame order by score desc");
+
+                    ResultSet resultSet=statement.executeQuery("select * from videogame order by score desc");
 
                     int height = 0;
-                    for(int count = 1; count < 8; ++count){
+                    for(int count = 1; count < 8 && resultSet.next(); ++count){
                         String rank = count + ".";
-                        String user = "user"; // resultSet.getString("name");
-                        String score = "score"; // resultSet.getString("score");
+                        String user =  resultSet.getString("user");
+                        String score = resultSet.getString("score");
+
 
                         /* Rank */
                         graphics2D.setColor(Color.yellow);
@@ -305,14 +325,44 @@ public class GamePanel extends JPanel  implements Runnable {
                         height += 100;
                     }
 
+
+
+                } catch (Exception e) {
+
+                    int height = 0;
+                    for(int count = 1; count < 8; ++count){
+                        String rank = count + ".";
+                        String user =  "user";
+                        String score = "score";
+
+                        /* Rank */
+                        graphics2D.setColor(Color.yellow);
+                        graphics2D.setFont(new Font("Algerian", Font.BOLD, 50));
+                        graphics2D.drawString(rank, 30, SCREEN_SHIFT_Y + height);
+
+                        /* Username */
+                        graphics2D.setColor(Color.yellow);
+                        graphics2D.setFont(new Font("Algerian", Font.BOLD, 50));
+                        graphics2D.drawString(user, 130, SCREEN_SHIFT_Y + height);
+
+                        /* Score */
+                        graphics2D.setColor(Color.yellow);
+                        graphics2D.setFont(new Font("Algerian", Font.BOLD, 50));
+                        graphics2D.drawString(score, 580, SCREEN_SHIFT_Y + height);
+
+                        height += 100;
+                    }
+
+
+                } finally {
+
                     /* Back */
                     graphics2D.setColor(Color.yellow);
                     graphics2D.setFont(new Font("Algerian", Font.BOLD, 50));
                     graphics2D.drawString("Back", leaderboardBackButton.x, leaderboardBackButton.y + 40);
 
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
+
             }
         }
 
